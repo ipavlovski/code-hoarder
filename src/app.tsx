@@ -1,4 +1,5 @@
 import { css } from 'styled-system/css'
+import imgUrl from '../assets/code-herder-exported.png'
 
 function ConstructionText() {
   const styles = css({
@@ -40,7 +41,7 @@ export default function App() {
 
   return (
     <div
-      style={{ backgroundImage: 'url("../assets/code-herder-exported.png")' }}
+      style={{ backgroundImage: `url("${imgUrl}")` }}
       className={styles}>
       <ConstructionText />
     </div>
