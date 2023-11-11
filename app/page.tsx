@@ -1,5 +1,6 @@
-import { Center } from 'styled-system/jsx'
+import Link from 'next/link'
 import { css } from 'styled-system/css'
+import { Center, VStack } from 'styled-system/jsx'
 
 export default function Home() {
   const styles = css({
@@ -9,14 +10,16 @@ export default function Home() {
     rounded: 'xl',
     textTransform: 'uppercase',
     _hover: {
-      background: 'emerald.800'
-    }
+      background: 'emerald.800',
+    },
   })
 
-  // return
+  // <div className={styles}>Hello panda 🐼!</div>
   return (
-    <Center height="100vh" background="slate.500" color="slate.100">
-      <div className={styles}>Hello panda 🐼!</div>
-    </Center>
+    <VStack height='100vh' background='slate.500' color='slate.100'>
+      <Link href='/mdx-test-1'>This is a test page</Link>
+      <Link href='/2023-11/231111-01'>Nov 11, 2023 - first post</Link>
+      <Link href='/2023-11/231111-02'>Nov 11, 2023 - second post</Link>
+    </VStack>
   )
 }
