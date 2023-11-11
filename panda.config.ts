@@ -5,7 +5,7 @@ export default defineConfig({
   preflight: true,
 
   // Where to look for your css declarations
-  include: ['./src/**/*.{js,jsx,ts,tsx}', './main.tsx'],
+  include: ['./components/**/*.{ts,tsx,js,jsx}', './app/**/*.{ts,tsx,js,jsx}'],
 
   // Files to exclude
   exclude: [],
@@ -15,21 +15,12 @@ export default defineConfig({
     extend: {
       keyframes: {
         marquee: {
-          '0%': {
-            transform: 'translateX(0%)'
-          },
-          '100%': {
-            transform: 'translateX(-100%)'
-          }
-        }
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
-      tokens: {
-        fonts: {
-          jakarta: { value: 'Plus Jakarta Sans, sans-serif' },
-          pacifico: { value: 'Pacifico, cursive;' }
-        }
-      }
-    }
+      tokens: {},
+    },
   },
 
   // hash classnames for devtools readability
@@ -39,5 +30,5 @@ export default defineConfig({
   jsxFramework: 'react',
 
   // The output directory for your css system
-  outdir: 'styled-system'
+  outdir: 'styled-system',
 })

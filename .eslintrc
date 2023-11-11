@@ -7,7 +7,8 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "next"
   ],
   "parserOptions": {
     "ecmaFeatures": { "jsx": true }
@@ -16,6 +17,7 @@
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/ban-ts-comment": "warn",
+    // "@typescript-eslint/indent": ["warn", 2],
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
@@ -24,7 +26,8 @@
     "arrow-parens": ["warn", "always"],
     "func-call-spacing": [1, "never"],
     "indent": "off",
-    "max-len": [1, { "code": 100, "ignoreUrls": true }],
+    // "max-len": [1, { "code": 100, "ignoreUrls": true }],
+    "max-len": "off",
     "no-empty-function": "off",
     "no-multi-spaces": [1, { "exceptions": { "Property": false } }],
     "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
