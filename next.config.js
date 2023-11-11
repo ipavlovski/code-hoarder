@@ -1,12 +1,19 @@
+const withMDX = require('@next/mdx')()
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
+  // Configure `pageExtensions` to include MDX files
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
+
+  // Disabling on production builds because we're running checks on PRs via GitHub Actions.
   eslint: {
-    // Disabling on production builds because we're running checks on PRs via GitHub Actions.
     ignoreDuringBuilds: true,
   },
+
   experimental: {
     serverActions: true,
   },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -17,6 +24,7 @@ module.exports = {
       },
     ],
   },
+
   async redirects() {
     return [
       {
@@ -27,3 +35,5 @@ module.exports = {
     ]
   },
 }
+
+module.exports = withMDX(nextConfig)

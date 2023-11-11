@@ -5,15 +5,17 @@
     "node": ">=18",
     "pnpm": ">=8"
   },
-
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "prepare": "panda codegen"
   },
-
   "dependencies": {
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@next/mdx": "^14.0.2",
+    "@types/mdx": "^2.0.10",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
