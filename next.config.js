@@ -1,4 +1,29 @@
-const withMDX = require('@next/mdx')()
+// const frontmatterPlugin = require('./lib/frontmatter')
+
+/**
+ * This is a plugin for remark in mdx.
+ * This should be a function that may take some options and
+ * should return a function with the following signature
+ * @param tree - the MDXAST
+ * @param file - the file node
+ * @return void - it should mutate the tree if needed
+ */
+const frontmatterPlugin = () => (tree, file) => {
+  if (tree.children[0].type === 'thematicBreak') {
+    const firstHeadingIndex = tree.children.findIndex((t) => t.type === 'heading')
+    if (firstHeadingIndex !== -1) {
+      // we will mutate the tree.children by removing these nodes
+      tree.children.splice(0, firstHeadingIndex + 1)
+    }
+  }
+}
+
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [frontmatterPlugin],
+  },
+})
 
 // const withMDX = require('@next/mdx')({
 //   extension: /\.mdx?$/,
@@ -8,9 +33,6 @@ const withMDX = require('@next/mdx')()
 //     providerImportSource: '@mdx-js/react',
 //   },
 // })
-
-
-
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
