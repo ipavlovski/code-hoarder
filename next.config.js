@@ -1,4 +1,11 @@
-const withMDX = require('@next/mdx')()
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    providerImportSource: '@mdx-js/react',
+  },
+})
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -16,14 +23,10 @@ const nextConfig = {
 
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.shopify.com',
-        pathname: '/s/files/**',
-      },
-    ],
   },
+
+  reactStrictMode: true,
+  swcMinify: true,
 
   async redirects() {
     return [
@@ -35,5 +38,4 @@ const nextConfig = {
     ]
   },
 }
-
 module.exports = withMDX(nextConfig)
