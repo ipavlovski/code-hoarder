@@ -1,4 +1,12 @@
-export default function MdxLayout({ children }: { children: React.ReactNode }) {
-  // Create any shared layout or styles here
-  return <div style={{ color: 'blue' }}>{children}</div>
+import Head from 'next/head'
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ color: 'blue' }}>
+      <Head>
+        <title>LOL 123 </title>
+      </Head>
+      {children}
+    </div>
+  )
 }
