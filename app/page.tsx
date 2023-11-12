@@ -5,8 +5,8 @@ import { css } from 'styled-system/css'
 import { Center, VStack } from 'styled-system/jsx'
 
 export default async function Home() {
-  const paths = fs.readdirSync('./app/posts').map((dir) =>
-    fs.readdirSync(`./app/posts/${dir}`).map((post) => `/posts/${dir}/${post}`)
+  const paths = fs.readdirSync('./app/posts').map((date) =>
+    fs.readdirSync(`./app/posts/${date}`).map((post) => `/posts/${date}/${post}`)
   ).flat()
   const posts = paths.map((path) => {
     const source = fs.readFileSync(`./app${path}/page.mdx`)
