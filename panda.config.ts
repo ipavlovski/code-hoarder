@@ -1,4 +1,4 @@
-import { defineConfig } from '@pandacss/dev'
+import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
 
 export default defineConfig({
   // Whether to use css reset
@@ -22,6 +22,13 @@ export default defineConfig({
       tokens: {},
     },
   },
+
+  globalCss: defineGlobalStyles({
+    'html, body': {
+      backgroundColor: 'gray.900',
+      color: 'gray.200'
+    },
+  }),
 
   // hash classnames for devtools readability
   hash: { cssVar: false, className: true },
