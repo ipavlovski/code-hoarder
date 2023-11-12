@@ -1,11 +1,16 @@
-const withMDX = require('@next/mdx')({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-    providerImportSource: '@mdx-js/react',
-  },
-})
+const withMDX = require('@next/mdx')()
+
+// const withMDX = require('@next/mdx')({
+//   extension: /\.mdx?$/,
+//   options: {
+//     remarkPlugins: [],
+//     rehypePlugins: [],
+//     providerImportSource: '@mdx-js/react',
+//   },
+// })
+
+
+
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -25,8 +30,8 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
 
-  reactStrictMode: true,
-  swcMinify: true,
+  // reactStrictMode: true,
+  // swcMinify: true,
 
   async redirects() {
     return [

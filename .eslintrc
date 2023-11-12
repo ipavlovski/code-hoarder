@@ -15,6 +15,7 @@
   },
   "ignorePatterns": ["*.config.js"],
   "rules": {
+    "jsx-a11y/alt-text": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/ban-ts-comment": "warn",
     // "@typescript-eslint/indent": ["warn", 2],
