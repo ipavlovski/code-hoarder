@@ -1,5 +1,3 @@
-// const frontmatterPlugin = require('./lib/frontmatter')
-
 /**
  * This is a plugin for remark in mdx.
  * This should be a function that may take some options and
@@ -25,9 +23,9 @@ const withMDX = require('@next/mdx')({
   },
 })
 
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 
