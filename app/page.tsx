@@ -18,8 +18,8 @@ export default function Home() {
   return (
     <VStack height='100vh' background='slate.500' color='slate.100'>
       <Link href='/mdx-test-1'>This is a test page</Link>
-      <Link href='/2023-11/231111-01'>Nov 11, 2023 - first post</Link>
-      <Link href='/2023-11/231111-02'>Nov 11, 2023 - second post</Link>
+      <Link href='/posts/2023-11/231111-01'>Nov 11, 2023 - first post</Link>
+      <Link href='/posts/2023-11/231111-02'>Nov 11, 2023 - second post</Link>
     </VStack>
   )
 }
