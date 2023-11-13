@@ -1,9 +1,26 @@
 ---
 title: Test october 1
 category: cat1
+tags: bash, nextjs
 ---
 
-# This is an OCTOBER import
+export const metadata = {
+    title: '2023-10-30 October'
+}
+
+# This is the first heading
+
+First heading is a major heading
+
+## This is second heading
+
+Second heading is smaller
+
+### This is third heading
+
+Some stuff goes here...
+
+
  
 Token components...
 
@@ -20,3 +37,83 @@ This is a list:
 - three
 
 And another react component:
+
+## Code box 1: tsx
+
+```tsx
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+ 
+// 🔥 Super granular and accurate highlighting
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
+  }
+ 
+  render() {
+    return (
+      <Html>
+        <Head />
+        <body className="bg-zinc-800 text-zinc-200">
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
+```
+
+## Code box 2: line numbers
+
+```tsx showLineNumbers /floatingStyles/
+import { useFloating } from '@floating-ui/react';
+ 
+function MyComponent() {
+  const { refs, floatingStyles } = useFloating();
+ 
+  return (
+    <>
+      <div ref={refs.setReference} />
+      <div ref={refs.setFloating} style={floatingStyles} />
+    </>
+  );
+}
+```
+
+## Code box 3: highlighting
+
+```tsx {1,5-7} /floatingStyles/
+import { useFloating } from '@floating-ui/react';
+ 
+function MyComponent() {
+  const { refs, floatingStyles } = useFloating();
+ 
+  return (
+    <>
+      <div ref={refs.setReference} />
+      <div ref={refs.setFloating} style={floatingStyles} />
+    </>
+  );
+}
+```
+
+
+## Code example 3: inline highlighting
+
+The result of `[1, 2, 3].join('-'){:js}` is `'1-2-3'{:js}`.
+
+
+## Code example 4: ansi highlighting
+
+```bash title="this is code title"
+
+  vite v2.8.6 dev server running at:
+ 
+  > Local: http://localhost:3000/
+  > Network: use `--host` to expose
+ 
+  ready in 125ms.
+ 
+8:38:02 PM [vite] hmr update /src/App.jsx
+```

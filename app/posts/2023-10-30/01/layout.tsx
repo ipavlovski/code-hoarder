@@ -1,11 +1,11 @@
-import Head from 'next/head'
+import { css } from 'styled-system/css'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const styles = css({
+    marginX: '2rem',
+  })
   return (
-    <div style={{ color: 'blue' }}>
-      <Head>
-        <title>LOL 123 </title>
-      </Head>
+    <div className={styles}>
       {children}
     </div>
   )

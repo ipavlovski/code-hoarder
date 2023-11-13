@@ -10,16 +10,22 @@ export const metadata = {
   description: 'its code herder, not hoarder.',
 }
 
+function Navbar() {
+  return (
+    <Flex align='center' justify='space-between' m='1rem 2rem 2rem'>
+      <Link href='/'>
+        <h1>LOGO</h1>
+      </Link>
+      <h3>stuff</h3>
+    </Flex>
+  )
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <Flex align='center' justify='space-between' m='.25rem 1rem'>
-          <Link href='/'>
-            <h1>LOGO</h1>
-          </Link>
-          <h3>stuff</h3>
-        </Flex>
+        <Navbar />
         {children}
       </body>
     </html>
