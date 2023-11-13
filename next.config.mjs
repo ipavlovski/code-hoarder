@@ -3,6 +3,10 @@ import fs from 'node:fs'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 
+
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
+
 /**
  * This is a plugin for remark in mdx.
  * This should be a function that may take some options and
@@ -59,7 +63,9 @@ const options = {
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm, frontmatterPlugin],
+    // remarkPlugins: [remarkGfm, frontmatterPlugin],
+    // remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [[rehypePrettyCode, options]],
   },
 })

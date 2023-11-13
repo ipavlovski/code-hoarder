@@ -1,14 +1,15 @@
----
-title: Test nov1 first..
-category: cat2
----
-
+import HeaderComponent from 'components/component-header'
 
 export const metadata = {
-    title: '1234 first'
+    title: 'Test nov1 first..',
+    category: ['cat2']
 }
 
+<HeaderComponent title={metadata.title} category={metadata.category} />
+
 import MyComponent from './component-1'
+
+# {metadata.title} - {metadata.category}
 
 # This is another example MDX page (nov11, first post)
  

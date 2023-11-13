@@ -1,12 +1,11 @@
----
-title: Test october 1
-category: cat1
-tags: bash, nextjs
----
+import HeaderComponent from 'components/component-header'
 
 export const metadata = {
-    title: '2023-10-30 October'
+    title: '2023-10-30 October 111',
+    category: ['bash', 'nextjs'],
 }
+
+<HeaderComponent title={metadata.title} category={metadata.category} />
 
 # This is the first heading
 
