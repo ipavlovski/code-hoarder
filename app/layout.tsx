@@ -3,6 +3,8 @@ import { Cormorant_Infant } from 'next/font/google'
 import Link from 'next/link'
 import { Flex } from 'styled-system/jsx'
 import './globals.css'
+import Image from 'next/image'
+import { css } from 'styled-system/css'
 
 const inter = Inter({ subsets: ['latin'] })
 const cormorant = Cormorant_Infant({ subsets: ['latin'], weight: ['400', '700'] })
@@ -40,13 +42,24 @@ export const metadata = {
   description: 'its code herder, not hoarder.',
 }
 
+function Logo() {
+  const styles = css({
+    filter: 'invert(100%)',
+  })
+
+  return (
+    <Link href='/'>
+      <Image alt='logo' src='/signature-2.svg' width={200} height={90} className={styles} />
+    </Link>
+  )
+}
+
 function Navbar() {
   return (
-    <Flex align='center' justify='space-between' m='2rem 3rem'>
-      <Link href='/'>
-        <h1>LOGO</h1>
-      </Link>
+    <Flex align='center' justify='space-between' m='0rem 3rem'>
+      <Logo />
       <h3>stuff</h3>
+
     </Flex>
   )
 }
