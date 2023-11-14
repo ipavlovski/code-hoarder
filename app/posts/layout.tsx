@@ -2,7 +2,7 @@ import { css } from 'styled-system/css'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const styles = css({
-    marginX: '2rem',
+    marginX: '3rem',
   })
 
   return (

@@ -7,13 +7,17 @@ type PostMetadata = { href: string; title: string; date: string }
 
 function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
   const styles = css({
-    fontSize: '.9rem',
+    fontSize: '.8rem',
     padding: '.1em',
-    textTransform: 'uppercase',
+    // fontStyle: 'italic',
+    // textTransform: 'uppercase',
     display: 'flex',
     color: 'gray.300',
-    gap: '1rem',
-    _hover: {
+    gap: '2rem',
+    '& span': {
+      fontStyle: 'normal',
+    },
+    '&:hover a': {
       color: 'gray.100',
     },
   })
@@ -33,13 +37,16 @@ export default async function Home() {
   })
 
   const posts: PostMetadata[] = []
-  for (const date of fs.readdirSync('./app/posts')) {
+  const dirs = fs.readdirSync('./app/posts', { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name)
+  for (const date of dirs) {
     for (const num of fs.readdirSync(`./app/posts/${date}`)) {
       const { metadata } = await import(`./posts/${date}/${num}/page.mdx`)
       posts.push({
         href: `/posts/${date}/${num}`,
         title: metadata.title,
-        date: date
+        date: date,
       })
     }
   }
