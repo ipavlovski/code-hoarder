@@ -1,4 +1,5 @@
 import { css } from 'styled-system/css'
+import Comments from 'components/comments'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const styles = css({
@@ -8,6 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles}>
       {children}
+      <Comments />
     </div>
   )
 }
