@@ -1,45 +1,52 @@
 import fs from 'fs'
-// import matter from 'gray-matter'
 import Link from 'next/link'
 import { css } from 'styled-system/css'
 import { Center, VStack } from 'styled-system/jsx'
 
-export default async function Home() {
-  const paths = fs.readdirSync('./app/posts').map((date) =>
-    fs.readdirSync(`./app/posts/${date}`).map((post) => `/posts/${date}/${post}`)
-  ).flat()
+type PostMetadata = { href: string; title: string; date: string }
 
-  // const posts = paths.map((path) => {
-  //   const source = fs.readFileSync(`./app${path}/page.mdx`)
-  //   const { data, content } = matter(source)
-  //   return {
-  //     path,
-  //     title: data.title as string,
-  //   }
-  // })
-
-  const posts2: any = []
-  for (const path of paths) {
-    // @ts-ignore
-    const { metadata } = await import(`.${path}/page.mdx`)
-    posts2.push({ path, title: metadata.title })
-  }
-
+function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
   const styles = css({
-    fontSize: '3xl',
-    fontWeight: 'bold',
-    padding: '.3em',
-    rounded: 'xl',
+    fontSize: '.9rem',
+    padding: '.1em',
     textTransform: 'uppercase',
+    display: 'flex',
+    color: 'gray.300',
+    gap: '1rem',
     _hover: {
-      background: 'emerald.800',
+      color: 'gray.100',
     },
   })
 
   return (
-    <VStack height='100vh' background='slate.500' color='slate.100'>
-      {/* @ts-ignore */}
-      {posts2.map(({ path, title }) => <Link href={path} key={path}>{title}</Link>)}
-    </VStack>
+    <div className={styles}>
+      <span>{date}</span>
+      <Link href={href} key={href}>{title}</Link>
+    </div>
+  )
+}
+
+export default async function Home() {
+  const styles = css({
+    minHeight: '100vh',
+    marginX: '3rem',
+  })
+
+  const posts: PostMetadata[] = []
+  for (const date of fs.readdirSync('./app/posts')) {
+    for (const num of fs.readdirSync(`./app/posts/${date}`)) {
+      const { metadata } = await import(`./posts/${date}/${num}/page.mdx`)
+      posts.push({
+        href: `/posts/${date}/${num}`,
+        title: metadata.title,
+        date: date
+      })
+    }
+  }
+
+  return (
+    <div className={styles}>
+      {posts.map((post) => <PostListing key={post.href} post={post} />)}
+    </div>
   )
 }

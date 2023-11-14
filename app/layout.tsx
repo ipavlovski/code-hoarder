@@ -12,7 +12,7 @@ export const metadata = {
 
 function Navbar() {
   return (
-    <Flex align='center' justify='space-between' m='1rem 2rem 2rem'>
+    <Flex align='center' justify='space-between' m='2rem 3rem'>
       <Link href='/'>
         <h1>LOGO</h1>
       </Link>
