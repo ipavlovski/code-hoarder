@@ -1,48 +1,51 @@
 import { css } from 'styled-system/css'
+import { Flex } from 'styled-system/jsx'
 
-function Tags() {
-  return <div></div>
+type Metadata = {
+  title: string
+  created: string
+  updated?: { date: string; comment: string }[]
+  category?: string
+  tags?: string[]
 }
 
-function Category({ category }: { category: string[] }) {
-  return <div>{category.join(', ')}</div>
+function Tags({ tags }: Pick<Metadata, 'tags'>) {
+  return <div>{tags?.join(', ')}</div>
 }
 
-function DateUpdated() {
-  return <div></div>
+function Category({ category }: Pick<Metadata, 'category'>) {
+  return <div>{category}</div>
 }
 
-function DateCreated() {
-  return <div></div>
+function DateUpdated({ updated }: Pick<Metadata, 'updated'>) {
+  return <div>{updated?.at(-1)?.date}</div>
+}
+
+function DateCreated({ created }: Pick<Metadata, 'created'>) {
+  return <div>{created}</div>
 }
 
 function Title({ title }: { title: string }) {
   const styles = css({
     fontSize: '2rem',
     color: 'gray.100',
-    marginBottom: '2rem'
+    marginBottom: '2rem',
   })
-  return <div className={styles}>{title}</div>
+  return <h1 className={styles}>{title}</h1>
 }
 
-export default function HeaderComponent(
-  { title, category }: { title: string; category: string[] },
-) {
-  // const styles = css({
-  //   fontSize: '2rem',
-  //   color: 'gray.100',
-  // })
+export default function HeaderComponent({ metadata }: { metadata: Metadata }) {
+  const { title, created, updated, category, tags } = metadata
+
   return (
-    <div>
-      <div>
-        <DateCreated />
-        <DateUpdated />
+    <Flex direction='column'>
+      <Flex gap='1rem' fontSize='.8rem'>
+        <DateCreated created={created} />
+        <DateUpdated updated={updated} />
         <Category category={category} />
-        <Tags />
-      </div>
-      <div>
-        <Title title={title} />
-      </div>
-    </div>
+        <Tags tags={tags} />
+      </Flex>
+      <Title title={title} />
+    </Flex>
   )
 }
