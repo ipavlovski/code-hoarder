@@ -27,9 +27,11 @@ function DateCreated({ created }: Pick<Metadata, 'created'>) {
 
 function Title({ title }: { title: string }) {
   const styles = css({
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     color: 'gray.100',
-    marginBottom: '2rem',
+    fontWeight: 'bold',
+    textTransform: 'capitalize',
+    marginBottom: '1rem',
   })
   return <h1 className={styles}>{title}</h1>
 }
@@ -38,7 +40,8 @@ export default function HeaderComponent({ metadata }: { metadata: Metadata }) {
   const { title, created, updated, category, tags } = metadata
 
   return (
-    <Flex direction='column'>
+    // <Flex direction='column'>
+    <>
       <Flex gap='1rem' fontSize='.8rem'>
         <DateCreated created={created} />
         <DateUpdated updated={updated} />
@@ -46,6 +49,7 @@ export default function HeaderComponent({ metadata }: { metadata: Metadata }) {
         <Tags tags={tags} />
       </Flex>
       <Title title={title} />
-    </Flex>
+    </>
+    // </Flex>
   )
 }

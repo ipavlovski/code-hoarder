@@ -4,6 +4,7 @@ import { css } from 'styled-system/css'
 export default function Layout({ children }: { children: React.ReactNode }) {
   const styles = css({
     marginX: '3rem',
+    fontSize: '.85rem',
     '& main': {
       minHeight: '83vh'
     }

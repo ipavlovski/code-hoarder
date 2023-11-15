@@ -9,13 +9,13 @@ function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
   const styles = css({
     fontSize: '.8rem',
     padding: '.1em',
-    // fontStyle: 'italic',
-    // textTransform: 'uppercase',
+    textTransform: 'capitalize',
     display: 'flex',
     color: 'gray.300',
-    gap: '2rem',
+    gap: '1.5rem',
     '& span': {
       fontStyle: 'normal',
+      color: 'gray.400'
     },
     '&:hover a': {
       color: 'gray.100',
@@ -40,6 +40,7 @@ export default async function Home() {
   const dirs = fs.readdirSync('./app/posts', { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name)
+    .reverse()
   for (const date of dirs) {
     for (const num of fs.readdirSync(`./app/posts/${date}`)) {
       const { metadata } = await import(`./posts/${date}/${num}/page.mdx`)
