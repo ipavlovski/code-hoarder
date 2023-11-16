@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { DetailedHTMLProps, ImgHTMLAttributes } from 'react'
 import { css } from 'styled-system/css'
 
+import TOC from 'components/toc'
+
 function Header1({ children }: { children: ReactNode }) {
   const styles = css({
     fontSize: '1.3rem',
@@ -59,7 +61,7 @@ function Img(props: ImgProps) {
     display: 'block',
     h: '200px',
     w: 'full',
-    my: '1rem'
+    my: '1rem',
   })
 
   return (
@@ -73,11 +75,23 @@ function Img(props: ImgProps) {
   )
 }
 
+// function TOC2({ headings }: any) {
+//   // console.log(props)
+//   const toc = JSON.parse(headings)
+//   console.dir(toc, { depth: null })
+//   return (
+//     <div style={{ color: 'red', fontSize: '2rem' }}>
+//       stuff
+//     </div>
+//   )
+// }
+
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => <Header1>{children}</Header1>,
     h2: ({ children }) => <Header2>{children}</Header2>,
     h3: ({ children }) => <Header3>{children}</Header3>,
+    toc: ({ headings }) => <TOC headings={headings} />,
     img: (props) => <Img {...props} />,
     ...components,
   }

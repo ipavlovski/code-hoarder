@@ -6,6 +6,47 @@ import createMDX from '@next/mdx'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 
+import { toString } from 'mdast-util-to-string'
+import { visit } from 'unist-util-visit'
+
+
+function parseNode(node, output, indexMap) {
+  const parsedNode = {
+    value: toString(node),
+    depth: node.depth,
+    children: [],
+  }
+
+  if (node.depth === 1) {
+    output.push(parsedNode)
+    indexMap[node.depth] = parsedNode
+  } else {
+    const parent = indexMap[node.depth - 1]
+    if (parent) {
+      parent.children.push(parsedNode)
+      indexMap[node.depth] = parsedNode
+    }
+  }
+}
+
+// heavily based on the following logic:
+// https://claritydev.net/blog/nextjs-blog-remark-interactive-table-of-contents
+const tocPlugin = () => (tree) => {
+  const headings = []
+  const indexMap = {}
+  visit(tree, 'heading', (node) => parseNode(node, headings, indexMap))
+
+  const toc = {
+    data: {
+      type: 'list',
+      hName: 'toc',
+      hProperties: { headings: JSON.stringify(headings) },
+    },
+  }
+
+  tree.children.push(toc)
+}
+
 /**
  * This is a plugin for remark in mdx.
  * This should be a function that may take some options and
@@ -54,7 +95,7 @@ const rehypePrettyCodeOptions = {
 const mdxOptions = {
   // remarkPlugins: [remarkGfm, frontmatterPlugin],
   // remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
-  remarkPlugins: [remarkGfm],
+  remarkPlugins: [remarkGfm, tocPlugin],
   rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
 }
 
