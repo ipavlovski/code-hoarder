@@ -18,7 +18,9 @@ const Comments = () => {
       reactionsEnabled='1'
       emitMetadata='0'
       inputPosition='top'
-      theme='preferred_color_scheme'
+      // theme='preferred_color_scheme'
+      // theme='noborder_dark'
+      theme='transparent_dark'
       lang='en'
       loading='lazy' />
   )
