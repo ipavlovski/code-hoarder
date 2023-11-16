@@ -1,8 +1,9 @@
-import Link from 'next/link'
-import { Flex } from 'styled-system/jsx'
 import Image from 'next/image'
-import { css } from 'styled-system/css'
+import Link from 'next/link'
 import { CgProfile } from 'react-icons/cg'
+import { css } from 'styled-system/css'
+import { Flex } from 'styled-system/jsx'
+
 function Logo() {
   const styles = css({
     filter: 'invert(100%)',
@@ -16,11 +17,20 @@ function Logo() {
 }
 
 export default function Navbar() {
+  const styles = css({
+
+    width: '100%',
+    display: 'grid',
+    gridTemplateColumns: '1fr 240px 640px 240px 1fr',
+    gridGap: '20px',
+  })
+
   return (
-    <Flex align='center' justify='space-between' m='0rem 3rem'>
-      <Logo />
-      <CgProfile size='2rem'/>
-    </Flex>
+    <div className={styles}>
+      <Flex style={{ gridColumn: 3 }} align='center' justify='space-between'>
+        <Logo />
+        <CgProfile size='2rem' />
+      </Flex>
+    </div>
   )
 }
-

@@ -16,7 +16,7 @@ function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
     '& span': {
       fontStyle: 'normal',
       color: 'gray.400',
-      fontFamily: 'monospace'
+      fontFamily: 'monospace',
     },
     '&:hover a': {
       color: 'gray.100',
@@ -35,6 +35,9 @@ export default async function Home() {
   const styles = css({
     minHeight: '100vh',
     marginX: '3rem',
+    display: 'grid',
+    gridTemplateColumns: '1fr 240px 640px 240px 1fr',
+    gridGap: '20px',
   })
 
   const posts: PostMetadata[] = []
@@ -55,7 +58,9 @@ export default async function Home() {
 
   return (
     <div className={styles}>
-      {posts.map((post) => <PostListing key={post.href} post={post} />)}
+      <div style={{ gridColumn: 3 }}>
+        {posts.map((post) => <PostListing key={post.href} post={post} />)}
+      </div>
     </div>
   )
 }
