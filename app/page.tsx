@@ -7,7 +7,7 @@ type PostMetadata = { href: string; title: string; date: string }
 
 function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
   const styles = css({
-    fontSize: '.8rem',
+    fontSize: '.9rem',
     padding: '.1em',
     textTransform: 'capitalize',
     display: 'flex',
@@ -15,7 +15,8 @@ function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
     gap: '1.5rem',
     '& span': {
       fontStyle: 'normal',
-      color: 'gray.400'
+      color: 'gray.400',
+      fontFamily: 'monospace'
     },
     '&:hover a': {
       color: 'gray.100',

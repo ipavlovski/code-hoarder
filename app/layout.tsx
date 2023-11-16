@@ -1,10 +1,10 @@
 import Navbar from 'components/navbar'
-import { Inter } from 'next/font/google'
-import { Cormorant_Infant } from 'next/font/google'
+import { Inter, Montserrat, Cormorant_Infant } from 'next/font/google'
+import {  } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700', '900'] })
 const cormorant = Cormorant_Infant({ subsets: ['latin'], weight: ['400', '700'] })
 
 // Font files can be colocated inside of `app`
@@ -41,7 +41,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className={hackFont.className}>
+      <body className={montserrat.className}>
         <Navbar />
         {children}
       </body>
