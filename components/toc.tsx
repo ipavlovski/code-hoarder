@@ -75,14 +75,14 @@ function TOC({ headings }: { headings: string }) {
   const styles = css({
     position: 'fixed',
     top: '6rem',
-    left: '0',
+    right: '0',
     fontWeight: 'regular',
     display: 'grid',
     width: '100%',
     gridTemplateColumns: '1fr 240px 640px 240px 1fr',
     zIndex: 100,
     gridGap: '20px',
-    hideBelow: 'lg'
+    hideBelow: 'lg',
   })
 
   const toc = JSON.parse(headings) as Heading[]
