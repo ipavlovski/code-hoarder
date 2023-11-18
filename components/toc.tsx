@@ -72,28 +72,41 @@ function renderNodes(nodes: Heading[]) {
 }
 
 function TOC({ headings }: { headings: string }) {
-  const styles = css({
-    position: 'fixed',
-    top: '6rem',
-    right: '0',
-    fontWeight: 'regular',
-    display: 'grid',
-    width: '100%',
-    gridTemplateColumns: '1fr 240px 640px 240px 1fr',
-    zIndex: 100,
-    gridGap: '20px',
-    hideBelow: 'lg',
-  })
+  const styles = {
+    wrapper: css({
+      position: 'absolute',
+      top: '5rem',
+      height: '100%',
+      width: '100%',
+    }),
+    grid: css({
+      position: 'sticky',
+      top: '1rem',
+      right: '0',
+      fontWeight: 'regular',
+      display: 'grid',
+      width: '100%',
+      gridTemplateColumns: '640px 240px 1fr',
+      zIndex: 100,
+      gridGap: '20px',
+      hideBelow: 'lg',
+    }),
+    item: css({
+      gridColumn: '2 / span 1 !important'
+    })
+  }
 
   const toc = JSON.parse(headings) as Heading[]
   console.dir(toc, { depth: null })
 
   if (toc.length == 0) return null
 
+  // style={{ gridColumn: 2 }}
+
   return (
-    <div>
-      <div className={styles}>
-        <div style={{ gridColumn: 4 }}>
+    <div className={styles.wrapper}>
+      <div className={styles.grid}>
+        <div className={styles.item} >
           <h3>Table of contents</h3>
           {renderNodes(toc)}
         </div>
@@ -128,4 +141,4 @@ function TOC2({ headings }: { headings: string }) {
   )
 }
 
-export default TOC2
+export default TOC
