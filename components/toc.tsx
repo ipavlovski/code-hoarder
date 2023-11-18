@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { css } from 'styled-system/css'
 
-function useHighlighted(id) {
-  const observer = useRef()
+function useHighlighted(id: string) {
+  const observer = useRef<IntersectionObserver>()
   const [activeId, setActiveId] = useState('')
 
   useEffect(() => {
-    const handleObserver = (entries) => {
+    const handleObserver: IntersectionObserverCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry?.isIntersecting) {
           setActiveId(entry.target.id)
@@ -20,13 +20,15 @@ function useHighlighted(id) {
       rootMargin: '0% 0% -35% 0px',
     })
 
-    const elements = document.querySelectorAll('h2, h3, h4')
-    elements.forEach((elem) => observer.current.observe(elem))
+    const elements = document.querySelectorAll('h1, h2, h3')
+    elements.forEach((elem) => observer.current?.observe(elem))
     return () => observer.current?.disconnect()
   }, [])
 
-  return [activeId === id, setActiveId]
+  return [activeId === id, setActiveId] as const
 }
+
+const headerValueToId = (value: string) => value.replace(/[\W_]+/g, '-').toLowerCase()
 
 type Heading = {
   value: string
@@ -34,35 +36,34 @@ type Heading = {
   children: Heading[]
 }
 
-const TOCLink = ({ node }: { node: Heading }) => {
-  const fontSizes = { 2: 'base', 3: 'sm', 4: 'xs' }
-  const id = node.value
-  // const [highlighted, setHighlighted] = useHighlighted(id)
+const TOCLink = ({ node: { depth, value } }: { node: Heading }) => {
+  const id = headerValueToId(value)
+  const [highlighted, setHighlighted] = useHighlighted(id)
+
   return (
-    // <a
-    //   href={`#${id}`}
-    //   className={`block text-${fontSizes[node.depth]} hover:accent-color py-1 ${
-    //     highlighted && 'accent-color'
-    //   }`}
-    //   onClick={(e) => {
-    //     e.preventDefault()
-    //     setHighlighted(id)
-    //     document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
-    //   }}>
-    //   {node.value}
-    // </a>
-    <a href={`#${id}`}>
-      {node.value}
+    <a
+      href={`#${id}`}
+      style={{ paddingLeft: `${(depth - 1) * 1}rem`, color: highlighted ? '#bc2b87' : undefined }}>
+      {value}
     </a>
   )
 }
 
 function renderNodes(nodes: Heading[]) {
+  const styles = css({
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    '& a:hover': {
+      color: '#bc2b87',
+    },
+  })
+
   return (
     <ul>
       {nodes.map((node) => (
         // <li key={node.data.hProperties.id}>
-        <li key={node.value}>
+        <li key={node.value} className={styles}>
           <TOCLink node={node} />
           {node.children?.length > 0 && renderNodes(node.children)}
         </li>
@@ -75,9 +76,10 @@ function TOC({ headings }: { headings: string }) {
   const styles = {
     wrapper: css({
       position: 'absolute',
-      top: '5rem',
+      top: '2rem',
       height: '100%',
       width: '100%',
+      pointerEvents: 'none',
     }),
     grid: css({
       position: 'sticky',
@@ -87,7 +89,7 @@ function TOC({ headings }: { headings: string }) {
       display: 'grid',
       width: '100%',
       gridTemplateColumns: '640px 240px 1fr',
-      zIndex: 100,
+      zIndex: 10,
       gridGap: '20px',
       hideBelow: 'lg',
     }),
@@ -98,6 +100,11 @@ function TOC({ headings }: { headings: string }) {
       backdropFilter: 'blur(13.4px)',
       padding: '1rem',
       gridColumn: '2 / span 1',
+      pointerEvents: 'all',
+    }),
+    title: css({
+      fontWeight: 'bold',
+      marginBottom: '.5rem',
     }),
   }
 
@@ -110,7 +117,7 @@ function TOC({ headings }: { headings: string }) {
     <div className={styles.wrapper}>
       <div className={styles.grid}>
         <div className={styles.item}>
-          <h3>Table of contents</h3>
+          <h3 className={styles.title}>On this page:</h3>
           {renderNodes(toc)}
         </div>
       </div>

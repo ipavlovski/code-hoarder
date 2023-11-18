@@ -20,7 +20,7 @@ export default function Navbar() {
     container: css({
       position: 'sticky',
       top: '0',
-      zIndex: 10,
+      zIndex: 100,
       display: 'grid',
       gridGap: '20px',
       gridTemplateColumns: {

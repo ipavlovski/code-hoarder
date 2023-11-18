@@ -6,6 +6,8 @@ import { css } from 'styled-system/css'
 
 import TOC from 'components/toc'
 
+const headerValueToId = (value: string) => value.replace(/[\W_]+/g, '-').toLowerCase()
+
 function Header1({ children }: { children: ReactNode }) {
   const styles = css({
     fontSize: '1.3rem',
@@ -25,7 +27,12 @@ function Header1({ children }: { children: ReactNode }) {
     },
   })
 
-  return <h1 className={styles}>{children}</h1>
+  const id = headerValueToId(children!.toString())
+  return (
+    <h1 id={id} className={styles}>
+      <a href={`#${id}`}>{children}</a>
+    </h1>
+  )
 }
 
 function Header2({ children }: { children: ReactNode }) {
@@ -38,7 +45,12 @@ function Header2({ children }: { children: ReactNode }) {
     marginBottom: '.9rem',
   })
 
-  return <h2 className={styles}>{children}</h2>
+  const id = headerValueToId(children!.toString())
+  return (
+    <h2 id={id} className={styles}>
+      <a href={`#${id}`}>{children}</a>
+    </h2>
+  )
 }
 
 function Header3({ children }: { children: ReactNode }) {
@@ -50,7 +62,12 @@ function Header3({ children }: { children: ReactNode }) {
     letterSpacing: 'wider',
   })
 
-  return <h3 className={styles}>{children}</h3>
+  const id = headerValueToId(children!.toString())
+  return (
+    <h3 id={id} className={styles}>
+      <a href={`#${id}`}>{children}</a>
+    </h3>
+  )
 }
 
 function Header4({ children }: { children: ReactNode }) {
@@ -63,7 +80,6 @@ function Header4({ children }: { children: ReactNode }) {
 
   return <h4 className={styles}>{children}</h4>
 }
-
 
 // note: cover vs. fill, and h-value (200px, 400px, etc.)
 type ImgProps = DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>

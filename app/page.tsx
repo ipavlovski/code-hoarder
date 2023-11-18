@@ -13,7 +13,6 @@ function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
     display: 'flex',
     color: 'gray.300',
     gap: '1.5rem',
-
     '& span': {
       fontStyle: 'normal',
       color: 'gray.400',
