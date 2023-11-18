@@ -92,8 +92,13 @@ function TOC({ headings }: { headings: string }) {
       hideBelow: 'lg',
     }),
     item: css({
-      gridColumn: '2 / span 1 !important'
-    })
+      background: 'rgba(255, 255, 255, 0.05)',
+      borderRadius: '.5rem',
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+      backdropFilter: 'blur(13.4px)',
+      padding: '1rem',
+      gridColumn: '2 / span 1',
+    }),
   }
 
   const toc = JSON.parse(headings) as Heading[]
@@ -101,43 +106,15 @@ function TOC({ headings }: { headings: string }) {
 
   if (toc.length == 0) return null
 
-  // style={{ gridColumn: 2 }}
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.grid}>
-        <div className={styles.item} >
+        <div className={styles.item}>
           <h3>Table of contents</h3>
           {renderNodes(toc)}
         </div>
       </div>
     </div>
-  )
-}
-
-function TOC2({ headings }: { headings: string }) {
-  const styles = css({
-    // gap: '1rem',
-    // gridTemplateColumns: 'subgrid',
-    // gridTemplateColumns: 'subgrid',
-    // display: 'grid',
-
-    // gridColumn: '4 / span 1',
-    // lg: {
-    //   gridColumn: '4 / span 1',
-    // },
-  })
-
-  const toc = JSON.parse(headings) as Heading[]
-  console.dir(toc, { depth: null })
-
-  if (toc.length == 0) return null
-
-  return (
-    <section className={styles}>
-      <h3>Table of contents</h3>
-      {renderNodes(toc)}
-    </section>
   )
 }
 

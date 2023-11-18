@@ -69,6 +69,7 @@ const frontmatterPlugin = () => (tree, file) => {
 const rehypePrettyCodeOptions = {
   // See Options section below.
   theme: 'one-dark-pro',
+  // grid: false,
   // keepBackground: false,
 
   // https://stackoverflow.com/questions/76549262
