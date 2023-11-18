@@ -91,13 +91,41 @@ function TOC({ headings }: { headings: string }) {
   if (toc.length == 0) return null
 
   return (
-    <div className={styles}>
-      <div style={{ gridColumn: 4 }}>
-        <h3>Table of contents</h3>
-        {renderNodes(toc)}
+    <div>
+      <div className={styles}>
+        <div style={{ gridColumn: 4 }}>
+          <h3>Table of contents</h3>
+          {renderNodes(toc)}
+        </div>
       </div>
     </div>
   )
 }
 
-export default TOC
+function TOC2({ headings }: { headings: string }) {
+  const styles = css({
+    // gap: '1rem',
+    // gridTemplateColumns: 'subgrid',
+    // gridTemplateColumns: 'subgrid',
+    // display: 'grid',
+
+    // gridColumn: '4 / span 1',
+    // lg: {
+    //   gridColumn: '4 / span 1',
+    // },
+  })
+
+  const toc = JSON.parse(headings) as Heading[]
+  console.dir(toc, { depth: null })
+
+  if (toc.length == 0) return null
+
+  return (
+    <section className={styles}>
+      <h3>Table of contents</h3>
+      {renderNodes(toc)}
+    </section>
+  )
+}
+
+export default TOC2

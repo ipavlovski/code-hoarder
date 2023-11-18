@@ -53,6 +53,18 @@ function Header3({ children }: { children: ReactNode }) {
   return <h3 className={styles}>{children}</h3>
 }
 
+function Header4({ children }: { children: ReactNode }) {
+  const styles = css({
+    textTransform: 'uppercase',
+    marginTop: '1.2rem',
+    marginBottom: '.8rem',
+    letterSpacing: 'wider',
+  })
+
+  return <h4 className={styles}>{children}</h4>
+}
+
+
 // note: cover vs. fill, and h-value (200px, 400px, etc.)
 type ImgProps = DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
 function Img(props: ImgProps) {
@@ -91,6 +103,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h1: ({ children }) => <Header1>{children}</Header1>,
     h2: ({ children }) => <Header2>{children}</Header2>,
     h3: ({ children }) => <Header3>{children}</Header3>,
+    h4: ({ children }) => <Header4>{children}</Header4>,
     toc: ({ headings }) => <TOC headings={headings} />,
     img: (props) => <Img {...props} />,
     ...components,

@@ -33,7 +33,7 @@ export default function Navbar() {
       borderRadius: '.5rem',
       boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
       backdropFilter: 'blur(13.4px)',
-      padding: '.5rem 2rem',
+      padding: '.5rem 1rem',
       marginY: '1rem',
       display: 'flex',
       alignItems: 'center',
