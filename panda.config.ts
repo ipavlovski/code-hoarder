@@ -20,6 +20,10 @@ export default defineConfig({
         },
       },
       tokens: {},
+      breakpoints: {
+        md: '680px',
+        lg: '1200px',
+      }
     },
   },
 

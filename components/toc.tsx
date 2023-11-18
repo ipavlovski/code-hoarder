@@ -72,7 +72,6 @@ function renderNodes(nodes: Heading[]) {
 }
 
 function TOC({ headings }: { headings: string }) {
-
   const styles = css({
     position: 'fixed',
     top: '6rem',
@@ -83,6 +82,7 @@ function TOC({ headings }: { headings: string }) {
     gridTemplateColumns: '1fr 240px 640px 240px 1fr',
     zIndex: 100,
     gridGap: '20px',
+    hideBelow: 'lg'
   })
 
   const toc = JSON.parse(headings) as Heading[]
@@ -92,7 +92,7 @@ function TOC({ headings }: { headings: string }) {
 
   return (
     <div className={styles}>
-      <div style={{gridColumn: 4}}>
+      <div style={{ gridColumn: 4 }}>
         <h3>Table of contents</h3>
         {renderNodes(toc)}
       </div>

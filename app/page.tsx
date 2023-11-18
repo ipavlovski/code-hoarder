@@ -13,6 +13,7 @@ function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
     display: 'flex',
     color: 'gray.300',
     gap: '1.5rem',
+
     '& span': {
       fontStyle: 'normal',
       color: 'gray.400',
@@ -31,15 +32,7 @@ function PostListing({ post: { href, title, date } }: { post: PostMetadata }) {
   )
 }
 
-export default async function Home() {
-  const styles = css({
-    minHeight: '100vh',
-    marginX: '3rem',
-    display: 'grid',
-    gridTemplateColumns: '1fr 240px 640px 240px 1fr',
-    gridGap: '20px',
-  })
-
+const findPostsInDir = async () => {
   const posts: PostMetadata[] = []
   const dirs = fs.readdirSync('./app/posts', { withFileTypes: true })
     .filter((dirent) => dirent.isDirectory())
@@ -55,10 +48,33 @@ export default async function Home() {
       })
     }
   }
+  return posts
+}
+
+export default async function Home() {
+  const posts = await findPostsInDir()
+
+  const styles = {
+    container: css({
+      display: 'grid',
+      gridGap: '20px',
+      minHeight: '100vh',
+      gridTemplateColumns: {
+        md: '1fr 640px 1fr',
+        lg: '1fr 240px 640px 240px 1fr',
+      },
+    }),
+    item: css({
+      gridColumn: '2 / span 1',
+      lg: {
+        gridColumn: '3 / span 1',
+      },
+    }),
+  }
 
   return (
-    <div className={styles}>
-      <div style={{ gridColumn: 3 }}>
+    <div className={styles.container}>
+      <div className={styles.item}>
         {posts.map((post) => <PostListing key={post.href} post={post} />)}
       </div>
     </div>

@@ -2,22 +2,31 @@ import Comments from 'components/comments'
 import { css } from 'styled-system/css'
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const styles = css({
-    marginX: '3rem',
-    fontWeight: 'regular',
-    display: 'grid',
-    gridTemplateColumns: '1fr 240px 640px 240px 1fr',
-    gridGap: '20px',
-    position: 'relative',
-    '& main': {
-      minHeight: '83vh',
-      maxWidth: '80ch',
-    },
-  })
+  const styles = {
+    container: css({
+      fontWeight: 'regular',
+      display: 'grid',
+      gridGap: '20px',
+      position: 'relative',
+      gridTemplateColumns: {
+        md: '1fr 640px 1fr',
+        lg: '1fr 240px 640px 240px 1fr',
+      },
+      '& main': {
+        minHeight: '83vh',
+      },
+    }),
+    item: css({
+      gridColumn: '2 / span 1',
+      lg: {
+        gridColumn: '3 / span 1',
+      },
+    }),
+  }
 
   return (
-    <div className={styles}>
-      <div style={{ gridColumn: 3 }}>
+    <div className={styles.container}>
+      <div className={styles.item}>
         <main>
           {children}
         </main>

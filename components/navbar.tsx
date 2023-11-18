@@ -17,17 +17,27 @@ function Logo() {
 }
 
 export default function Navbar() {
-  const styles = css({
 
-    width: '100%',
-    display: 'grid',
-    gridTemplateColumns: '1fr 240px 640px 240px 1fr',
-    gridGap: '20px',
-  })
+  const styles = {
+    container: css({
+      display: 'grid',
+      gridGap: '20px',
+      gridTemplateColumns: {
+        md: '1fr 640px 1fr',
+        lg: '1fr 240px 640px 240px 1fr',
+      },
+    }),
+    item: css({
+      gridColumn: '2 / span 1',
+      lg: {
+        gridColumn: '3 / span 1',
+      },
+    }),
+  }
 
   return (
-    <div className={styles}>
-      <Flex style={{ gridColumn: 3 }} align='center' justify='space-between'>
+    <div className={styles.container}>
+      <Flex className={styles.item} align='center' justify='space-between'>
         <Logo />
         <CgProfile size='2rem' />
       </Flex>
