@@ -2,7 +2,7 @@ import { ReactNode } from '@mdx-js/react/lib'
 import type { MDXComponents } from 'mdx/types'
 import Image from 'next/image'
 import { DetailedHTMLProps, ImgHTMLAttributes } from 'react'
-import { css } from 'styled-system/css'
+import { css, cx } from 'styled-system/css'
 
 import TOC from 'components/toc'
 
@@ -103,6 +103,15 @@ function Img(props: ImgProps) {
   )
 }
 
+function CalloutDirective({ contents, id }: { contents: string; id?: string }) {
+  const styles = css({ background: 'slate.800', color: 'slate.200' })
+
+  return (
+    <div className={cx('callout', styles)}>
+      {contents}
+    </div>
+  )
+}
 
 // :smth[value]{#id}
 
@@ -125,13 +134,15 @@ function DirectiveParser({ name, type, contents, id }: DirectiveParserParams) {
   const styles = css({
     color: 'red',
   })
-  return (
-    <div className={styles}>
-      {contents}
-    </div>
-  )
-}
 
+  return type == 'containerDirective' && name == 'callout'
+    ? <CalloutDirective contents={contents} id={id} />
+    : (
+      <div className={styles}>
+        {contents}
+      </div>
+    )
+}
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

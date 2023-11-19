@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       md: '1fr 640px 1fr',
       lg: '1fr 240px 640px 240px 1fr',
     },
-    '& > :not(section):not(h4)': {
+    '& > :not(section):not(.callout)': {
       gridColumn: '2 / span 1',
       lg: {
         gridColumn: '3 / span 1',

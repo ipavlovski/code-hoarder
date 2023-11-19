@@ -105,6 +105,7 @@ function TOC({ headings }: { headings: string }) {
     title: css({
       fontWeight: 'bold',
       marginBottom: '.5rem',
+      textTransform: 'uppercase'
     }),
   }
 
