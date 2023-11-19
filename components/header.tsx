@@ -40,7 +40,6 @@ export default function HeaderComponent({ metadata }: { metadata: Metadata }) {
   const { title, created, updated, category, tags } = metadata
 
   return (
-    // <Flex direction='column'>
     <>
       <Flex gap='1rem' fontSize='.8rem'>
         <DateCreated created={created} />
@@ -50,6 +49,5 @@ export default function HeaderComponent({ metadata }: { metadata: Metadata }) {
       </Flex>
       <Title title={title} />
     </>
-    // </Flex>
   )
 }

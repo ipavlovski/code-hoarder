@@ -1,155 +1,15 @@
-import { ReactNode } from '@mdx-js/react/lib'
 import type { MDXComponents } from 'mdx/types'
-import Image from 'next/image'
-import { DetailedHTMLProps, ImgHTMLAttributes } from 'react'
-import { css, cx } from 'styled-system/css'
 
-import TOC from 'components/toc'
-
-const headerValueToId = (value: string) => value.replace(/[\W_]+/g, '-').toLowerCase()
-
-function Header1({ children }: { children: ReactNode }) {
-  const styles = css({
-    fontSize: '1.3rem',
-    fontWeight: 'bold',
-    marginTop: '2.1rem',
-    marginBottom: '1rem',
-    position: 'relative',
-    color: 'hsl(0, 0%, 80%)',
-    _before: {
-      position: 'absolute',
-      top: '-1px',
-      left: '-1.4rem',
-      color: '#bc2b87',
-      content: '"#"',
-      fontWeight: 'bold',
-      fontSize: '1.4rem',
-    },
-  })
-
-  const id = headerValueToId(children!.toString())
-  return (
-    <h1 id={id} className={styles}>
-      <a href={`#${id}`}>{children}</a>
-    </h1>
-  )
-}
-
-function Header2({ children }: { children: ReactNode }) {
-  const styles = css({
-    fontSize: '1.1rem',
-    fontWeight: 'bold',
-    textDecoration: 'underline',
-    letterSpacing: 'wide',
-    marginTop: '1.9rem',
-    marginBottom: '.9rem',
-  })
-
-  const id = headerValueToId(children!.toString())
-  return (
-    <h2 id={id} className={styles}>
-      <a href={`#${id}`}>{children}</a>
-    </h2>
-  )
-}
-
-function Header3({ children }: { children: ReactNode }) {
-  const styles = css({
-    fontWeight: 'bold',
-    textTransform: 'uppercase',
-    marginTop: '1.7rem',
-    marginBottom: '.8rem',
-    letterSpacing: 'wider',
-  })
-
-  const id = headerValueToId(children!.toString())
-  return (
-    <h3 id={id} className={styles}>
-      <a href={`#${id}`}>{children}</a>
-    </h3>
-  )
-}
-
-function Header4({ children }: { children: ReactNode }) {
-  const styles = css({
-    textTransform: 'uppercase',
-    marginTop: '1.2rem',
-    marginBottom: '.8rem',
-    letterSpacing: 'wider',
-  })
-
-  return <h4 className={styles}>{children}</h4>
-}
-
-// note: cover vs. fill, and h-value (200px, 400px, etc.)
-type ImgProps = DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-function Img(props: ImgProps) {
-  const styles = css({
-    pos: 'relative',
-    display: 'block',
-    h: '200px',
-    w: 'full',
-    my: '1rem',
-  })
-
-  return (
-    <div className={styles}>
-      <Image
-        src={props.src!}
-        alt={props.alt!}
-        fill
-        style={{ objectFit: 'cover', borderRadius: '8px' }} />
-    </div>
-  )
-}
-
-function CalloutDirective({ contents, id }: { contents: string; id?: string }) {
-  const styles = css({ background: 'slate.800', color: 'slate.200' })
-
-  return (
-    <div className={cx('callout', styles)}>
-      {contents}
-    </div>
-  )
-}
-
-// :smth[value]{#id}
-
-// ::youtube[Video of a cat in a box]{#01ab2cd3efg}
-// { name: 'youtube', children: 'video of a cat in a box', id: string }
-
-// :::some-container{#some-container-id}
-// one
-// two
-// three
-// :::
-
-type DirectiveParserParams = {
-  name: string
-  type: 'textDirective' | 'leafDirective' | 'containerDirective'
-  contents: string
-  id?: string
-}
-function DirectiveParser({ name, type, contents, id }: DirectiveParserParams) {
-  const styles = css({
-    color: 'red',
-  })
-
-  return type == 'containerDirective' && name == 'callout'
-    ? <CalloutDirective contents={contents} id={id} />
-    : (
-      <div className={styles}>
-        {contents}
-      </div>
-    )
-}
+import DirectiveParser from 'components/mdx/directives'
+import { Header1, Header2, Header3 } from 'components/mdx/headlines'
+import Img from 'components/mdx/image'
+import TOC from 'components/mdx/toc'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => <Header1>{children}</Header1>,
     h2: ({ children }) => <Header2>{children}</Header2>,
     h3: ({ children }) => <Header3>{children}</Header3>,
-    h4: ({ children }) => <Header4>{children}</Header4>,
     toc: ({ headings }) => <TOC headings={headings} />,
     directive: (props) => <DirectiveParser {...props} />,
     img: (props) => <Img {...props} />,
