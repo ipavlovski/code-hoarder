@@ -109,8 +109,6 @@ function TOC({ headings }: { headings: string }) {
   }
 
   const toc = JSON.parse(headings) as Heading[]
-  console.dir(toc, { depth: null })
-
   if (toc.length == 0) return null
 
   return (

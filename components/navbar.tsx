@@ -27,6 +27,7 @@ export default function Navbar() {
         md: '1fr 640px 1fr',
         lg: '1fr 240px 640px 240px 1fr',
       },
+      pointerEvents: 'none'
     }),
     item: css({
       background: 'rgba(255, 255, 255, 0.05)',
@@ -43,6 +44,7 @@ export default function Navbar() {
       lg: {
         gridColumn: '3 / span 1',
       },
+      pointerEvents: 'all'
     }),
   }
 

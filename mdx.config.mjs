@@ -1,14 +1,10 @@
-import fs from 'node:fs'
-import rehypePrettyCode from 'rehype-pretty-code'
-import remarkGfm from 'remark-gfm'
-
 import createMDX from '@next/mdx'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
+import rehypePrettyCode from 'rehype-pretty-code'
+import remarkDirective from 'remark-directive'
+import remarkGfm from 'remark-gfm'
 
 import { toString } from 'mdast-util-to-string'
 import { visit } from 'unist-util-visit'
-
 
 function parseNode(node, output, indexMap) {
   const parsedNode = {
@@ -45,6 +41,29 @@ const tocPlugin = () => (tree) => {
   }
 
   tree.children.push(toc)
+}
+
+function directivesHandler() {
+  /**
+   * @param {import('mdast').Root} tree
+   *   Tree.
+   * @returns {undefined}
+   *   Nothing.
+   */
+  return (tree) => {
+    visit(tree, (node) => {
+      if (['textDirective', 'leafDirective', 'containerDirective'].includes(node.type)) {
+        const data = node.data || (node.data = {})
+        data.hName = 'directive'
+        data.hProperties = {
+          contents: toString(node.children),
+          name: node.name,
+          type: node.type,
+          id: node.attributes?.id,
+        }
+      }
+    })
+  }
 }
 
 /**
@@ -95,8 +114,7 @@ const rehypePrettyCodeOptions = {
 
 const mdxOptions = {
   // remarkPlugins: [remarkGfm, frontmatterPlugin],
-  // remarkPlugins: [remarkGfm, remarkFrontmatter, remarkMdxFrontmatter],
-  remarkPlugins: [remarkGfm, tocPlugin],
+  remarkPlugins: [remarkGfm, tocPlugin, remarkDirective, directivesHandler],
   rehypePlugins: [[rehypePrettyCode, rehypePrettyCodeOptions]],
 }
 

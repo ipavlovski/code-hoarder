@@ -103,16 +103,35 @@ function Img(props: ImgProps) {
   )
 }
 
-// function TOC2({ headings }: any) {
-//   // console.log(props)
-//   const toc = JSON.parse(headings)
-//   console.dir(toc, { depth: null })
-//   return (
-//     <div style={{ color: 'red', fontSize: '2rem' }}>
-//       stuff
-//     </div>
-//   )
-// }
+
+// :smth[value]{#id}
+
+// ::youtube[Video of a cat in a box]{#01ab2cd3efg}
+// { name: 'youtube', children: 'video of a cat in a box', id: string }
+
+// :::some-container{#some-container-id}
+// one
+// two
+// three
+// :::
+
+type DirectiveParserParams = {
+  name: string
+  type: 'textDirective' | 'leafDirective' | 'containerDirective'
+  contents: string
+  id?: string
+}
+function DirectiveParser({ name, type, contents, id }: DirectiveParserParams) {
+  const styles = css({
+    color: 'red',
+  })
+  return (
+    <div className={styles}>
+      {contents}
+    </div>
+  )
+}
+
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -121,6 +140,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ children }) => <Header3>{children}</Header3>,
     h4: ({ children }) => <Header4>{children}</Header4>,
     toc: ({ headings }) => <TOC headings={headings} />,
+    directive: (props) => <DirectiveParser {...props} />,
     img: (props) => <Img {...props} />,
     ...components,
   }

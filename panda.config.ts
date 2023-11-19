@@ -5,7 +5,8 @@ export default defineConfig({
   preflight: true,
 
   // Where to look for your css declarations
-  include: ['./components/**/*.{ts,tsx,js,jsx}', './app/**/*.{ts,tsx,js,jsx}', './mdx-components.tsx'],
+  include: ['./components/**/*.{ts,tsx,js,jsx}', './app/**/*.{ts,tsx,js,jsx}',
+    './mdx-components.tsx'],
 
   // Files to exclude
   exclude: [],
@@ -23,14 +24,16 @@ export default defineConfig({
       breakpoints: {
         md: '680px',
         lg: '1200px',
-      }
+      },
     },
   },
 
   globalCss: defineGlobalStyles({
     'html, body': {
       backgroundColor: 'gray.900',
-      color: 'gray.200'
+      color: 'gray.200',
+      scrollBehavior: 'smooth',
+      scrollPaddingTop: '5rem',
     },
   }),
 
