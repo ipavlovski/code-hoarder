@@ -5,7 +5,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const styles = css({
     fontWeight: 'regular',
     display: 'grid',
-    gridGap: '20px',
+    gridColumnGap: '20px',
+    gridRowGap: '4px',
     position: 'relative',
     // minHeight: '100vh',
     gridTemplateColumns: {
