@@ -70,7 +70,7 @@ export default class MyDocument extends Document {
 }
 ```
 
-## Code box 2: line numbers
+## Code box 3-A: line numbers
 
 
 
@@ -94,7 +94,7 @@ function MyComponent() {
 }
 ```
 
-## Code box 3: highlighting
+## Code box 3-B: highlighting
 
 ```tsx {1,5-7} /floatingStyles/
 import { useFloating } from '@floating-ui/react';
@@ -110,6 +110,25 @@ function MyComponent() {
   );
 }
 ```
+
+## Code box 3-C: highlighting WITH line numbers
+
+```tsx showLineNumbers {2,6,8-11}
+import { useFloating } from '@floating-ui/react';
+ 
+function MyComponent() {
+  const { refs, floatingStyles } = useFloating();
+ 
+  return (
+    <>
+      <div ref={refs.setReference} />
+      <div ref={refs.setFloating} style={floatingStyles} />
+    </>
+  );
+}
+```
+
+
 
 
 ## Code example 3: inline highlighting
