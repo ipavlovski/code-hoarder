@@ -9,7 +9,7 @@ code {
     font-family: ui-monospace, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-span[data-rehype-pretty-code-fragment] > code {
+span[data-rehype-pretty-code-figure] > code {
   font-family: ui-monospace, Consolas, "Liberation Mono", "Courier New", monospace;
   padding: .25rem .375rem;
   margin: auto .25rem;
@@ -17,12 +17,12 @@ span[data-rehype-pretty-code-fragment] > code {
 }
 
 
-div[data-rehype-pretty-code-fragment] {
+figure[data-rehype-pretty-code-figure] {
   overflow: hidden;
   border-radius: 0.5rem;
 }
  
-div[data-rehype-pretty-code-fragment] pre {
+figure[data-rehype-pretty-code-figure] pre {
   overflow-x: auto;
  
   padding: .5rem .25rem;
@@ -30,7 +30,7 @@ div[data-rehype-pretty-code-fragment] pre {
   line-height: 1.4rem;
 }
 
-div[data-rehype-pretty-code-title] {
+figure[data-rehype-pretty-code-title] {
   border-top-left-radius: 0.375rem;
   background-color: hsla(0, 13%, 65%, 0.1);
   padding: .5rem .75rem;
@@ -40,12 +40,12 @@ div[data-rehype-pretty-code-title] {
   color: rgb(255 228 230 / 0.7);
 }
 
-div[data-rehype-pretty-code-fragment] span[data-line]  {
+figure[data-rehype-pretty-code-figure] span[data-line]  {
   padding-left: 0.5rem;
   padding-right: 0.75rem;
 }
  
-div[data-rehype-pretty-code-fragment] .line-highlighted {
+figure[data-rehype-pretty-code-figure] .line-highlighted {
   border-left-color: hsla(290, 96%, 82%, 0.7);
   background-color: hsla(289, 96%, 90%, 0.08);
   position: relative;
@@ -76,4 +76,8 @@ code[data-line-numbers-max-digits='3']>[data-line]::before {
 .word-highlighted {
     background-color: rgba(42, 163, 17, 0.1);
     padding: .25rem;
+}
+
+mark[data-highlighted-chars] > span {
+  background-color: auto;
 }
