@@ -3,6 +3,7 @@ import BaseLayout from "./base-layout.astro";
 const { frontmatter } = Astro.props;
 import PostTitle from 'src/components/post-title'
 import { css } from 'styled-system/css'
+import Comments from 'src/components/comments.tsx'
 
 const styles = css({
     fontWeight: 'regular',
@@ -19,6 +20,7 @@ const styles = css({
       tags={frontmatter.tags}
       />
     <slot />
+    <Comments client:load />
   </div>
 </BaseLayout>
   
