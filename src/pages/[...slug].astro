@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import {Header1, Header2, Header3} from 'src/components/mdx/headlines'
 import Image from 'src/components/mdx/image'
+import Directives from 'src/components/mdx/directives'
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -15,6 +16,16 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
+
+const components = {
+  h1: Header1, 
+  h2: Header2, 
+  h3: Header3, 
+  img: Image, 
+  directive: Directives
+}
+
 ---
 
-<Content components={{h1: Header1, h2: Header2, h3: Header3, img: Image }}/>
+
+<Content components={components}/>

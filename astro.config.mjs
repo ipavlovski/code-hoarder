@@ -8,7 +8,6 @@ import directivesPlugin from './src/lib/directives.mjs'
 export default defineConfig({
   integrations: [react(), mdx()],
   markdown: {
-    // Applied to .md and .mdx files
     remarkPlugins: [remarkDirective, directivesPlugin],
     rehypePlugins: [],
   },
