@@ -1,7 +1,0 @@
----
-import { getEntry } from 'astro:content';
-const entry = await getEntry('posts', '02/page');
-const { Content, headings } = await entry.render();
----
-<p>Tags: {entry.data.tags}</p>
-<Content />

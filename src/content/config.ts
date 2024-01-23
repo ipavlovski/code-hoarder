@@ -5,10 +5,15 @@ import { defineCollection, z } from 'astro:content'
 const postCollection = defineCollection({
   type: 'content', // v2.5.0 and later
   schema: z.object({
+    createdAt: z.string(),
     title: z.string(),
-    tags: z.array(z.string()),
+    description: z.string().optional(),
+    updated: z.object({date: z.string(), note: z.string()}).array().optional(),
+    tags: z.string().array().optional(),
+    category: z.string().optional(),
   }),
 })
+
 
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {

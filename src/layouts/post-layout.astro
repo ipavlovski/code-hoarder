@@ -16,7 +16,7 @@ const styles = css({
   <div class={styles}>
     <PostTitle
       title={frontmatter.title} 
-      created={frontmatter.pubDate.slice(0, 10)}
+      createdAt={frontmatter.createdAt}
       tags={frontmatter.tags}
       />
     <slot />

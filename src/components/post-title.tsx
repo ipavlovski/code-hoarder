@@ -2,9 +2,10 @@ import { css } from 'styled-system/css'
 import { Flex } from 'styled-system/jsx'
 
 type Metadata = {
+  createdAt: string
   title: string
-  created: string
-  updated?: { date: string; comment: string }[]
+  description?: string
+  updated?: { date: string; note: string }[]
   category?: string
   tags?: string[]
 }
@@ -21,8 +22,8 @@ function DateUpdated({ updated }: Pick<Metadata, 'updated'>) {
   return <div>{updated?.at(-1)?.date}</div>
 }
 
-function DateCreated({ created }: Pick<Metadata, 'created'>) {
-  return <div>{created}</div>
+function DateCreated({ createdAt }: Pick<Metadata, 'createdAt'>) {
+  return <div>{createdAt}</div>
 }
 
 function Title({ title }: { title: string }) {
@@ -36,13 +37,12 @@ function Title({ title }: { title: string }) {
   return <h1 className={styles}>{title}</h1>
 }
 
-export default function HeaderComponent({ title, created, updated, category, tags }: Metadata) {
-  // const { title, created, updated, category, tags } = metadata
-
+export default function HeaderComponent(props: Metadata) {
+  const { title, createdAt, updated, category, tags, description } = props
   return (
     <>
       <Flex gap='1rem' fontSize='.8rem'>
-        <DateCreated created={created} />
+        <DateCreated createdAt={createdAt} />
         <DateUpdated updated={updated} />
         <Category category={category} />
         <Tags tags={tags} />

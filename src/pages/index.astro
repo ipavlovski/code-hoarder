@@ -15,7 +15,10 @@ const styles = css({
 <BaseLayout pageTitle={pageTitle}>
 
   <div class={styles}>
-    <Blogpost href={'/example'} title="Example" />
-    {allPosts.map((post) => <Blogpost href={post.url} title={post.frontmatter.title} />)}
+    {allPosts.map((post) => <Blogpost 
+      href={post.frontmatter.slug} 
+      title={post.frontmatter.title} 
+      createdAt={post.frontmatter.createdAt}
+      />)}
   </div>
 </BaseLayout>

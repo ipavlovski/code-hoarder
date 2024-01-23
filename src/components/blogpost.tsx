@@ -1,8 +1,8 @@
 import { css } from 'styled-system/css'
 
-const date = '2023-10-30'
-
-export default function Blogpost({ href, title}: {href?: string, title: string}) {
+export default function Blogpost(
+  { href, title, createdAt }: { href?: string; title: string; createdAt: string },
+) {
   const styles = css({
     fontSize: '.9rem',
     padding: '.1em',
@@ -22,7 +22,7 @@ export default function Blogpost({ href, title}: {href?: string, title: string})
 
   return (
     <div className={styles}>
-      <span>{date}</span>
+      <span>{createdAt}</span>
       <a href={href} key={href}>{title}</a>
     </div>
   )
