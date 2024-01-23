@@ -18,7 +18,7 @@ export default function Header() {
   const styles = {
     container: css({
       position: 'sticky',
-      top: '0',
+      top: '.25rem',
       zIndex: 100,
       pointerEvents: 'none',
     }),

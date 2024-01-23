@@ -1,29 +1,21 @@
+import { type PostDataProps } from 'src/content/config'
+import getTagIcon from 'src/lib/tag-icon'
 import { css } from 'styled-system/css'
 import { Flex } from 'styled-system/jsx'
-import getTagIcon from 'src/lib/tag-icon'
 
-type Metadata = {
-  createdAt: string
-  title: string
-  description?: string
-  updated?: { date: string; note: string }[]
-  category?: string
-  tags?: string[]
-}
-
-function Tags({ tags }: Pick<Metadata, 'tags'>) {
+function Tags({ tags }: { tags: PostDataProps['tags'] }) {
   return <div>{tags?.join(', ')}</div>
 }
 
-function Category({ category }: Pick<Metadata, 'category'>) {
+function Category({ category }: { category: PostDataProps['category'] }) {
   return <div>{category}</div>
 }
 
-function DateUpdated({ updated }: Pick<Metadata, 'updated'>) {
+function DateUpdated({ updated }: { updated: PostDataProps['updated'] }) {
   return <div>{updated?.at(-1)?.date}</div>
 }
 
-function DateCreated({ createdAt }: Pick<Metadata, 'createdAt'>) {
+function DateCreated({ createdAt }: { createdAt: PostDataProps['createdAt'] }) {
   return <div>{createdAt}</div>
 }
 
@@ -38,8 +30,8 @@ function Title({ title }: { title: string }) {
   return <h1 className={styles}>{title}</h1>
 }
 
-export default function HeaderComponent(props: Metadata) {
-  const { title, createdAt, updated, category, tags, description } = props
+export function PostTitle({ postData }: { postData: PostDataProps }) {
+  const { title, createdAt, updated, category, tags, description } = postData
   return (
     <>
       <Flex gap='1rem' fontSize='.8rem'>

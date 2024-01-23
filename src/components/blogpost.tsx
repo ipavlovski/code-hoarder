@@ -62,7 +62,7 @@ function Tags({ tags }: { tags: string[] | undefined }) {
     <div className={styles}>
       {tags.map((tag) => {
         const tagIcon = getTagIcon(tag)
-        return <tagIcon.icon title={`tag:${tag}`} />
+        return <tagIcon.icon key={tag} title={`tag:${tag}`} />
       })}
     </div>
   )
