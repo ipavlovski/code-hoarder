@@ -1,13 +1,20 @@
 ---
 import BaseLayout from "../layouts/base-layout.astro";
-import Blogpost from "../components/blogpost.astro"
+import Blogpost from "../components/blogpost.tsx"
+import { css } from 'styled-system/css'
 const pageTitle = "Home Page";
 
 const allPosts = await Astro.glob("./posts/**/*.mdx");
+
+const styles = css({
+  minHeight: '100vh',
+  marginLeft: '2rem'
+})
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <ul>
-    {allPosts.map((post) => <Blogpost url={post.url} title={post.frontmatter.title} />)}
-  </ul>
+
+  <div class={styles}>
+    {allPosts.map((post) => <Blogpost href={post.url} title={post.frontmatter.title} />)}
+  </div>
 </BaseLayout>

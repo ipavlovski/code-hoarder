@@ -1,0 +1,24 @@
+---
+import BaseLayout from "./base-layout.astro";
+const { frontmatter } = Astro.props;
+import PostTitle from 'src/components/post-title'
+import { css } from 'styled-system/css'
+
+const styles = css({
+    fontWeight: 'regular',
+    marginX: '2rem',
+    minHeight: '100vh',
+  })
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <div class={styles}>
+    <PostTitle
+      title={frontmatter.title} 
+      created={frontmatter.pubDate.slice(0, 10)}
+      tags={frontmatter.tags}
+      />
+    <slot />
+  </div>
+</BaseLayout>
+  

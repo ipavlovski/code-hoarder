@@ -1,53 +1,49 @@
+import logo from 'public/signature.svg'
+import { CgProfile } from 'react-icons/cg'
 import { css } from 'styled-system/css'
-import { Flex } from 'styled-system/jsx'
 
-type Metadata = {
-  title: string
-  created: string
-  updated?: { date: string; comment: string }[]
-  category?: string
-  tags?: string[]
-}
-
-function Tags({ tags }: Pick<Metadata, 'tags'>) {
-  return <div>{tags?.join(', ')}</div>
-}
-
-function Category({ category }: Pick<Metadata, 'category'>) {
-  return <div>{category}</div>
-}
-
-function DateUpdated({ updated }: Pick<Metadata, 'updated'>) {
-  return <div>{updated?.at(-1)?.date}</div>
-}
-
-function DateCreated({ created }: Pick<Metadata, 'created'>) {
-  return <div>{created}</div>
-}
-
-function Title({ title }: { title: string }) {
+function Logo() {
   const styles = css({
-    fontSize: '1.5rem',
-    color: 'gray.100',
-    fontWeight: 'bold',
-    textTransform: 'capitalize',
-    marginBottom: '1rem',
+    filter: 'invert(100%)',
   })
-  return <h1 className={styles}>{title}</h1>
-}
-
-export default function HeaderComponent({ metadata }: { metadata: Metadata }) {
-  const { title, created, updated, category, tags } = metadata
 
   return (
-    <>
-      <Flex gap='1rem' fontSize='.8rem'>
-        <DateCreated created={created} />
-        <DateUpdated updated={updated} />
-        <Category category={category} />
-        <Tags tags={tags} />
-      </Flex>
-      <Title title={title} />
-    </>
+    <a href='/'>
+      <img alt='logo' src={logo.src} width={150} height={90} className={styles} />
+    </a>
+  )
+}
+
+export default function Header() {
+  const styles = {
+    container: css({
+      position: 'sticky',
+      top: '0',
+      zIndex: 100,
+      pointerEvents: 'none',
+    }),
+    item: css({
+      background: 'rgba(255, 255, 255, 0.05)',
+      borderRadius: '.5rem',
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
+      backdropFilter: 'blur(13.4px)',
+      padding: '.5rem 1rem',
+      marginY: '1rem',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: '1rem',
+      pointerEvents: 'all',
+      marginX: '2rem',
+    }),
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.item}>
+        <Logo />
+        <CgProfile size='2rem' />
+      </div>
+    </div>
   )
 }
