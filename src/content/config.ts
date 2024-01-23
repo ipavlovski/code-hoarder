@@ -1,5 +1,6 @@
 // 1. Import utilities from `astro:content`
 import { defineCollection, z } from 'astro:content'
+import type { CollectionEntry } from 'astro:content';
 
 // 2. Define a `type` and `schema` for each collection
 const postCollection = defineCollection({
@@ -14,6 +15,7 @@ const postCollection = defineCollection({
   }),
 })
 
+export type PostDataProps = CollectionEntry<'posts'>['data']
 
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {

@@ -1,8 +1,9 @@
+import { type PostDataProps } from 'src/content/config'
 import { css } from 'styled-system/css'
 
-export default function Blogpost(
-  { href, title, createdAt }: { href?: string; title: string; createdAt: string },
-) {
+export default function Blogpost(props: { href: string; postData: PostDataProps }) {
+  const { href, postData: { title, createdAt, category, tags } } = props
+  
   const styles = css({
     fontSize: '.9rem',
     padding: '.1em',
