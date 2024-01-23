@@ -4,7 +4,7 @@ import Blogpost from "../components/blogpost.tsx"
 import { css } from 'styled-system/css'
 const pageTitle = "Home Page";
 
-const allPosts = await Astro.glob("./posts/**/*.mdx");
+const allPosts = await Astro.glob("../content/posts/**/*.mdx");
 
 const styles = css({
   minHeight: '100vh',
@@ -15,6 +15,7 @@ const styles = css({
 <BaseLayout pageTitle={pageTitle}>
 
   <div class={styles}>
+    <Blogpost href={'/example'} title="Example" />
     {allPosts.map((post) => <Blogpost href={post.url} title={post.frontmatter.title} />)}
   </div>
 </BaseLayout>
