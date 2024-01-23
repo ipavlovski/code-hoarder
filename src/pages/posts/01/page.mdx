@@ -1,12 +1,14 @@
-import Header from 'components/header'
-
-export const metadata = {
-    title: 'Code blocks and headers.',
-    created: '2023-10-30',
-    category: ['bash', 'nextjs'],
-}
-
-<Header metadata={metadata} />
+---
+layout: ../../../layouts/base-layout.astro
+title: 'My First Blog Post'
+pubDate: 2022-07-01
+description: "This is the first post of my new Astro blog."
+author: "Astro Learner"
+image:
+  url: "https://docs.astro.build/assets/full-logo-light.png"
+  alt: "The Astro logo with the word One."
+tags: ["astro", "blogging", "learning in public"]
+---
 
 Text can actually go before the first heading.
 
@@ -71,13 +73,6 @@ export default class MyDocument extends Document {
 ```
 
 ## Code box 3-A: line numbers
-
-
-
-:::callout{#success}
-NOTE: THIS IS HOPEFULLY GONNA GO ON THE SIDE
-maybe...
-:::
 
 ```tsx showLineNumbers /floatingStyles/
 import { useFloating } from '@floating-ui/react';

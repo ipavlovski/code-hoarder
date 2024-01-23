@@ -1,7 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-public/
-
 # dependencies
 /node_modules
 /.pnp
@@ -40,19 +38,25 @@ yarn-error.log*
 next-env.d.ts
 .env*.local
 
-##############
-
-# ignore scratch files
+# main
+node_modules/
 scratch.*
-
-# ignore assets and dist directories
-assets/
+.env
 dist/
-
-# prisma
 prisma/*.db*
 prisma/migrations/
+assets/
 
 # panda
 styled-system
 styled-system-static
+
+# Astro generated types
+.astro/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+

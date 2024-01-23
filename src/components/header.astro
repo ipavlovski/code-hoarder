@@ -1,0 +1,33 @@
+---
+import logo from "../../public/signature.svg";
+import { CgProfile } from "react-icons/cg";
+---
+
+<style>
+  img {
+    filter: invert(100%);
+    width: 150px;
+    height: 60px;
+  }
+  div {
+    display: flex;
+    position: sticky;
+    top: 0;
+    index: 100;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(13.4px);
+    margin: 1rem;
+    padding: 0.5rem;
+  }
+</style>
+
+<div>
+  <a href="/">
+    <img src={logo.src} alt="logo" />
+  </a>
+  <CgProfile size="2rem" />
+</div>

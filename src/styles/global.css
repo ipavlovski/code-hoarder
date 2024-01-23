@@ -1,6 +1,5 @@
 @layer reset, base, tokens, recipes, utilities;
 
-
 /* based on work of: */
 /* https://github.com/atomiks/rehype-pretty-code/issues/99 */
 /* https://delba.dev/blog/next-blog-build-time-syntax-highlighting#setup-pretty-code-and-contentlayer */
