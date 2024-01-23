@@ -8,10 +8,10 @@ const postCollection = defineCollection({
   schema: z.object({
     createdAt: z.string(),
     title: z.string(),
+    category: z.string(),
     description: z.string().optional(),
-    updated: z.object({date: z.string(), note: z.string()}).array().optional(),
     tags: z.string().array().optional(),
-    category: z.string().optional(),
+    updated: z.object({date: z.string(), note: z.string()}).array().optional(),
   }),
 })
 

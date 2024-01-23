@@ -1,5 +1,6 @@
 import { css } from 'styled-system/css'
 import { Flex } from 'styled-system/jsx'
+import getTagIcon from 'src/lib/tag-icon'
 
 type Metadata = {
   createdAt: string
