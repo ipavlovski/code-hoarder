@@ -84,5 +84,5 @@ export default (tag: string) => {
   if (match) return match
 
   const firstLetter = tag.at(0) || 'a'
-  return letters.find((v) => v.letter = firstLetter) || letters[0]
+  return letters.find((v) => v.letter == firstLetter) || letters[0]
 }

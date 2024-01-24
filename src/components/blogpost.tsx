@@ -50,7 +50,7 @@ function Tags({ tags }: { tags: string[] | undefined }) {
 
   const styles = css({
     display: 'flex',
-    gap: '.25rem',
+    gap: '.375rem',
     '& svg:hover': {
       cursor: 'pointer',
       color: 'pink.300',
