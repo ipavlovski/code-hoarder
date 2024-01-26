@@ -2,7 +2,11 @@ import { DateTime, Interval } from 'luxon'
 import { useState } from 'react'
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb'
 import { css } from 'styled-system/css'
-import { Box, Grid, styled } from 'styled-system/jsx'
+import { Box, styled } from 'styled-system/jsx'
+
+/*
+INPIRED BY: https://codepen.io/RobVermeer/pen/zBgdwg
+*/
 
 type HeadingProps = { date: DateTime | null; setter: (monthNumber: number) => void }
 function Heading({ date, setter }: HeadingProps) {
@@ -10,6 +14,7 @@ function Heading({ date, setter }: HeadingProps) {
     display: 'flex',
     gap: '1rem',
     alignItems: 'center',
+    roundedTop: 'xl',
     '& > a': {
       color: 'white',
       fontSize: '1.5rem',
@@ -23,23 +28,31 @@ function Heading({ date, setter }: HeadingProps) {
     },
     '& > .month': {
       textAlign: 'center',
-      p: 2,
+      p: 1,
+      m: 2,
       _hover: {
         bg: 'slate.400',
         rounded: 'lg',
       },
     },
+    '& h1': {
+      textTransform: 'uppercase',
+      letterSpacing: '2px',
+      fontWeight: 'bold',
+    },
   })
 
   return (
-    <styled.nav className={styles} m='2rem' p='2' bg='slate.800'>
+    <styled.nav className={styles} px='2rem' bg='slate.800'>
       <styled.a mr='auto' onClick={() => setter(-1)}>
         <TbChevronLeft />
       </styled.a>
-      <Box className='month' onClick={() => setter(0)}>
-        <h1>{date?.monthLong}</h1>
-        <h2>{date?.year}</h2>
-      </Box>
+      <styled.div className='month' m='0' p='0' onClick={() => setter(0)}>
+        <h1>
+          {date?.monthLong}
+          <styled.span ml='2'>{date?.year}</styled.span>
+        </h1>
+      </styled.div>
       <styled.a ml='auto' onClick={() => setter(1)}>
         <TbChevronRight />
       </styled.a>
@@ -82,11 +95,14 @@ function Days({ days, dates, setter }: DaysProps) {
     const styles = css({
       color: 'slate.200',
       fontWeight: 'medium',
+      width: '3rem',
+      textAlign: 'center',
+      lineHeight: '2rem',
       '&.inactive': { color: 'slate.500' },
-      '&.start': { bg: 'pink.300', roundedLeft: 'lg' },
-      '&.end': { bg: 'pink.300', roundedRight: 'lg' },
-      '&.range': { bg: 'pink.300' },
-      '&.day': { bg: 'pink.300', roundedLeft: 'lg', roundedRight: 'lg' },
+      '&.start': { bg: 'pink.800', roundedLeft: 'lg' },
+      '&.end': { bg: 'pink.800', roundedRight: 'lg' },
+      '&.range': { bg: 'pink.800' },
+      '&.day': { bg: 'pink.800', roundedLeft: 'lg', roundedRight: 'lg' },
       '&.today': { textDecoration: 'underline' },
       _hover: { color: 'white', cursor: 'pointer' },
     })
@@ -112,7 +128,7 @@ function Days({ days, dates, setter }: DaysProps) {
     )
   }
 
-  return <>{days.map((date) => <Day key={date.millisecond} date={date} />)}</>
+  return <>{days.map((date, ind) => <Day key={ind} date={date} />)}</>
 }
 
 export default function DatePicker() {
@@ -160,20 +176,31 @@ export default function DatePicker() {
       : monthOffset == 0 && startDate != null
       ? setMonthDate(startDate)
       : undefined
+
+    window.getSelection()?.removeAllRanges()
   }
 
   const styles = css({
+    display: 'grid',
+    rowGap: '1',
     justifyContent: 'center',
     gridTemplateColumns: 'repeat(7, 3rem)',
+    justifyItems: 'center',
   })
 
   return (
     <>
-      <Heading date={monthDate} setter={monthSetter} />
-      <Grid className={styles} p='4' m='8' gap='1.5' bg='slate.800'>
-        <Labels />
-        <Days days={days} dates={{ monthDate, startDate, endDate }} setter={dateSetter} />
-      </Grid>
+      <Box mx='3rem' my='2'>
+        <styled.input rounded='md' bg='transparent' px='2' />
+      </Box>
+      <Box maxW='23rem' mx='3rem' my='2'>
+        <Heading date={monthDate} setter={monthSetter} />
+        <Box className={styles} px='12' pb='2' gap='0' bg='slate.800' roundedBottom='xl'>
+          <Labels />
+          <Days days={days} dates={{ monthDate, startDate, endDate }}
+            setter={dateSetter} />
+        </Box>
+      </Box>
     </>
   )
 }
