@@ -1,8 +1,9 @@
 import { DateTime, Interval } from 'luxon'
 import { useState } from 'react'
+import { BiCalendar } from 'react-icons/bi'
 import { TbChevronLeft, TbChevronRight } from 'react-icons/tb'
 import { css } from 'styled-system/css'
-import { Box, styled } from 'styled-system/jsx'
+import { Box, Flex, styled } from 'styled-system/jsx'
 
 /*
 INPIRED BY: https://codepen.io/RobVermeer/pen/zBgdwg
@@ -131,6 +132,30 @@ function Days({ days, dates, setter }: DaysProps) {
   return <>{days.map((date, ind) => <Day key={ind} date={date} />)}</>
 }
 
+function Input() {
+  const styles = css({
+    // borderRadius: '1rem',
+    borderBottom: '2px solid white',
+    color: 'gray.200',
+    paddingX: '1ch',
+    outline: 0,
+    borderWidth: '0 0 2px',
+    borderColor: 'gray.500',
+    transition: 'border-color 300ms ease',
+    fontSize: '.9rem',
+    '&:focus': {
+      borderColor: 'pink.300',
+    },
+  })
+
+  return (
+    <Flex mx='3rem' my='2' gap='1rem'>
+      <BiCalendar size='1.5rem' />
+      <styled.input className={styles} bg='transparent' px='2' />
+    </Flex>
+  )
+}
+
 export default function DatePicker() {
   const [monthDate, setMonthDate] = useState<DateTime>(DateTime.now().startOf('day'))
   const [startDate, setStartDate] = useState<DateTime | null>(
@@ -190,9 +215,7 @@ export default function DatePicker() {
 
   return (
     <>
-      <Box mx='3rem' my='2'>
-        <styled.input rounded='md' bg='transparent' px='2' />
-      </Box>
+      <Input />
       <Box maxW='23rem' mx='3rem' my='2'>
         <Heading date={monthDate} setter={monthSetter} />
         <Box className={styles} px='12' pb='2' gap='0' bg='slate.800' roundedBottom='xl'>
