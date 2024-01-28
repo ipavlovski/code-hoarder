@@ -156,7 +156,7 @@ function Input() {
   )
 }
 
-export default function DatePicker() {
+export function DatePicker() {
   const [monthDate, setMonthDate] = useState<DateTime>(DateTime.now().startOf('day'))
   const [startDate, setStartDate] = useState<DateTime | null>(
     monthDate.minus({ days: 5 }),
@@ -216,14 +216,14 @@ export default function DatePicker() {
   return (
     <>
       <Input />
-      <Box maxW='23rem' mx='3rem' my='2'>
+      {/* <Box maxW='23rem' mx='3rem' my='2'>
         <Heading date={monthDate} setter={monthSetter} />
         <Box className={styles} px='12' pb='2' gap='0' bg='slate.800' roundedBottom='xl'>
           <Labels />
           <Days days={days} dates={{ monthDate, startDate, endDate }}
             setter={dateSetter} />
         </Box>
-      </Box>
+      </Box> */}
     </>
   )
 }

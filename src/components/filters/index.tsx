@@ -1,3 +1,4 @@
+import { DatePicker } from './date-picker'
 import getTagIcon from 'src/lib/tag-icon'
 import { css } from 'styled-system/css'
 
@@ -18,27 +19,9 @@ function IconList({ tags }: { tags: string[] }) {
 }
 
 function DateFilter() {
-  const styles = css({
-    // border: '1px solid black',
-    border: 'none',
-    background: 'transparent',
-    fontSize: '1.5rem',
-    color: 'blue',
-    backgroundColor: 'yellow',
-    colorScheme: 'dark'
-    // '&::-webkit-calendar-picker-indicator': {
-    //   display: 'none',
-    // },
-  })
 
   return (
-    <input
-      className={styles}
-      type='date'
-      id='start'
-      name='trip-start'
-      value='2023-07-22'
-      min='2023-01-01' />
+    <DatePicker />
   )
 }
 
@@ -84,7 +67,7 @@ export function Filters({ tags, categories }: { tags: string[]; categories: stri
   return (
     <div className={styles}>
       <DateFilter />
-      <CategoryFilter categories={categories} />
+      {/* <CategoryFilter categories={categories} /> */}
       <input />
       <IconList tags={tags} />
     </div>
