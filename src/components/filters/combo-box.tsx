@@ -2,7 +2,8 @@ import { autoUpdate, flip, FloatingFocusManager, FloatingPortal, offset, size, u
   useFloating, useId, useInteractions, useListNavigation,
   useRole } from '@floating-ui/react'
 import type { HTMLProps, ReactNode } from 'react'
-import { createContext, forwardRef, useContext, useRef, useState } from 'react'
+import { createContext, forwardRef, useContext, useImperativeHandle, useRef,
+  useState } from 'react'
 import { LuChevronsUpDown } from 'react-icons/lu'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
@@ -133,6 +134,69 @@ const InputComponent = forwardRef<HTMLInputElement>(
   },
 )
 
+type DropdownProps = {
+  getItemProps: ReturnType<typeof useInteractions>['getItemProps']
+  getFloatingProps: ReturnType<typeof useInteractions>['getFloatingProps']
+  floatingStyles: React.CSSProperties
+}
+
+type DropdownRef = {
+  listRef: (HTMLElement | null)[]
+  domReference: HTMLInputElement | null
+  setFloating: (node: HTMLElement | null) => void
+}
+
+const Dropdown = forwardRef<DropdownRef, DropdownProps>(
+  function Dropdown(props, ref) {
+    const { floatingStyles, getFloatingProps, getItemProps } = props
+    const {
+      setOpen,
+      getReferenceProps,
+      activeIndex,
+      setActiveIndex,
+      setInputValue,
+      inputValue,
+      items,
+    } = useContext(CategoriesContext)
+
+    const styles = css({
+      bg: 'transparent',
+      p: '2',
+      rounded: 'md',
+    })
+
+    const domReference = (typeof ref != 'function' && ref?.current?.domReference) || null
+    const listRef = (typeof ref != 'function' && ref?.current?.listRef) || null
+    const setFloating = (typeof ref != 'function' && ref?.current?.setFloating) || null
+
+    return (
+      <div className={styles} {...getFloatingProps({
+        ref: setFloating,
+        style: {
+          ...floatingStyles,
+          overflowY: 'auto',
+          border: '1px solid var(--colors-pink-300)',
+        },
+      })}>
+        {items.map((item, index) => (
+          <Item key={item} active={activeIndex === index} {...getItemProps({
+            ref: (node) => {
+              if (listRef) listRef[index] = node
+            },
+            onClick: () => {
+              setInputValue(item)
+              setOpen(false)
+              domReference?.focus()
+            },
+          })}>
+            {item}
+          </Item>
+        ))}
+      </div>
+    )
+  },
+)
+
 function AutoComplete() {
   /* 1: HOOKS */
   const [open, setOpen] = useState(false)
@@ -161,6 +225,13 @@ function AutoComplete() {
     ],
   })
 
+  const ref = useRef<DropdownRef>(null)
+  useImperativeHandle(ref, () => ({
+    listRef: listRef.current,
+    domReference: refs.domReference.current,
+    setFloating: refs.setFloating,
+  }))
+
   /* 3: USE INTERACTIONS */
   const role = useRole(context, { role: 'listbox' })
   const dismiss = useDismiss(context)
@@ -181,14 +252,6 @@ function AutoComplete() {
     item.toLowerCase().startsWith(inputValue.toLowerCase())
   )
 
-  const styles = {
-    container: css({
-      bg: 'transparent',
-      p: '2',
-      rounded: 'md',
-    }),
-  }
-
   return (
     <CategoriesContext.Provider
       value={{ activeIndex, setActiveIndex, inputValue, setInputValue, setOpen,
@@ -197,29 +260,7 @@ function AutoComplete() {
       <FloatingPortal>
         {open && (
           <FloatingFocusManager context={context} initialFocus={-1} visuallyHiddenDismiss>
-            <div className={styles.container} {...getFloatingProps({
-              ref: refs.setFloating,
-              style: {
-                ...floatingStyles,
-                overflowY: 'auto',
-                border: '1px solid var(--colors-pink-300)',
-              },
-            })}>
-              {items.map((item, index) => (
-                <Item key={item} active={activeIndex === index} {...getItemProps({
-                  ref: (node) => {
-                    listRef.current[index] = node
-                  },
-                  onClick: () => {
-                    setInputValue(item)
-                    setOpen(false)
-                    refs.domReference.current?.focus()
-                  },
-                })}>
-                  {item}
-                </Item>
-              ))}
-            </div>
+            <Dropdown {...{ getItemProps, getFloatingProps, floatingStyles }} ref={ref} />
           </FloatingFocusManager>
         )}
       </FloatingPortal>

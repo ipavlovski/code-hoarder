@@ -1,3 +1,4 @@
+import Combobox from 'src/components/filters/combo-box'
 import { DatePicker } from './date-picker'
 import getTagIcon from 'src/lib/tag-icon'
 import { css } from 'styled-system/css'
@@ -25,19 +26,19 @@ function DateFilter() {
   )
 }
 
-function CategoryFilter({ categories }: { categories: string[] }) {
-  const styles = css({
-    color: 'gray.100',
-    backgroundColor: 'gray.900',
-    outline: 0,
-  })
+// function CategoryFilter({ categories }: { categories: string[] }) {
+//   const styles = css({
+//     color: 'gray.100',
+//     backgroundColor: 'gray.900',
+//     outline: 0,
+//   })
 
-  return (
-    <select name='categories' className={styles}>
-      {categories.map((v) => <option value={v}>{v}</option>)}
-    </select>
-  )
-}
+//   return (
+//     <select name='categories' className={styles}>
+//       {categories.map((v) => <option value={v}>{v}</option>)}
+//     </select>
+//   )
+// }
 
 export function Filters({ tags, categories }: { tags: string[]; categories: string[] }) {
   const styles = css({
@@ -68,6 +69,7 @@ export function Filters({ tags, categories }: { tags: string[]; categories: stri
     <div className={styles}>
       <DateFilter />
       {/* <CategoryFilter categories={categories} /> */}
+      <Combobox />
       <input />
       <IconList tags={tags} />
     </div>

@@ -25,7 +25,7 @@ const allCategories = posts.map(v => v.data.category)
 
 <BaseLayout pageTitle={pageTitle}>
   <div class={styles}>
-    <Filters tags={allTags} categories={allCategories} />
+    <Filters client:load tags={allTags} categories={allCategories} />
     {posts.map((post) => <Blogpost postData={post.data} href={post.slug} />)}
   </div>
 </BaseLayout>
