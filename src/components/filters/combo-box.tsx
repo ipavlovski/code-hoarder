@@ -128,7 +128,8 @@ const InputComponent = forwardRef<HTMLInputElement>(
           placeholder: 'Category...',
           'aria-autocomplete': 'list',
         })} />
-        <LuChevronsUpDown style={{ position: 'absolute', top: 8, right: 8 }} />
+        <LuChevronsUpDown style={{ position: 'absolute', top: 8, right: 8 }}
+          onClick={() => (setOpen((prevState) => !prevState))} />
       </div>
     )
   },
