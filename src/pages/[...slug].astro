@@ -1,25 +1,25 @@
 ---
 import { getCollection } from 'astro:content'
-import Comments from 'src/components/comments.tsx'
-import Directives from 'src/components/mdx/directives'
-import { Header1, Header2, Header3 } from 'src/components/mdx/headlines'
-import Image from 'src/components/mdx/image'
-import { PostTitle } from 'src/components/post-title'
-import { css } from 'styled-system/css'
-import BaseLayout from "../layouts/base-layout.astro"
+import Comments from '../components/blogpost/comments.tsx'
+import PostTitle from '../components/blogpost/post-title.astro'
+import Layout from '../layouts/layout.astro'
+import Directives from '../components/mdx/directives'
+import Image from '../components/mdx/image'
+import { Header1, Header2, Header3 } from '../components/mdx/headlines'
 
 // 1. Generate a new path for every collection entry
+// strip-off the mdx extension from the path
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('posts');
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+  const blogEntries = await getCollection('posts')
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.id.replace(/.mdx$/, '') },
+    props: { entry },
+  }))
 }
 
 // 2. For your template, you can get the entry directly from the prop
-const { entry } = Astro.props;
-const { Content } = await entry.render();
-
+const { entry } = Astro.props
+const { Content } = await entry.render()
 
 const components = {
   h1: Header1, 
@@ -29,17 +29,19 @@ const components = {
   directive: Directives
 }
 
-const styles = css({
-    fontWeight: 'regular',
-    marginX: '2rem',
-    minHeight: '100vh',
-  })
 ---
 
-<BaseLayout pageTitle={entry.data.title}>
-  <div class={styles}>
-    <PostTitle postData={entry.data}/>
-    <Content components={components}/>
+<Layout title={entry.data.title}>
+  <main>
+    <!-- <h1>{entry.data.title}</h1> -->
+    <PostTitle post={entry.data}/>
+    <Content components={components} />
     <Comments client:load />
-  </div>
-</BaseLayout>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 1.25rem;
+  }
+</style>

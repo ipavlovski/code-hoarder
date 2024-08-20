@@ -1,0 +1,96 @@
+---
+import { type PostDataProps } from '../../content/config'
+import getTagIcon from '../../lib/tag-icon'
+
+interface Props {
+  post: PostDataProps
+  href: string
+}
+
+const { post, href } = Astro.props
+---
+
+<li class="blogpost">
+  <div class="date-created">{post.createdAt}</div>
+  <div class="category">{post.category}</div>
+  <div class="title">
+    <a href={href}>{post.title}</a>
+  </div>
+  <div class="tags">
+    {
+      post.tags?.map((tag) => {
+      const tagIcon = getTagIcon(tag)
+      return <tagIcon.icon title={`tag:${tag}`} />
+      })
+    }
+  </div>
+</li>
+
+<style>
+.blogpost {
+  list-style: none;
+  display: flex;
+  align-items: end;
+  gap: .75rem;
+  padding: .1em;
+}
+
+.date-created {
+  font-style: normal;
+  color: hsl(219, 8%, 66%);
+  font-family: monospace;
+  font-size: .8rem;
+}
+
+.date-created:hover {
+    cursor: pointer;
+    color: pink;
+    transition: color 300ms ease;
+}
+
+.title {
+  font-size: .9rem;
+  text-transform: capitalize;
+}
+
+.title > a {
+  text-decoration: none;
+  color: white;
+}
+
+.title:hover {
+    cursor: pointer;
+    color: pink;
+    transition: color 300ms ease;
+}
+
+.category {
+  font-style: normal;
+  color: slate.300;
+  font-family: monospace;
+  width: 9ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: .8rem;
+
+}
+
+.category:hover {
+    cursor: pointer;
+    color: pink;
+    transition: color 300ms ease;
+}
+
+.tags {
+  display: flex;
+  gap: .375rem;
+  margin-left: auto;
+}
+
+.tags svg:hover {
+  cursor: pointer;
+  color: pink;
+  transition: color 300ms ease;
+}
+</style>

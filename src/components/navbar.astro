@@ -1,0 +1,49 @@
+---
+import { CgProfile } from 'react-icons/cg'
+---
+
+<nav>
+  <div>
+    <a href="/">
+      <span>Stuck On Torque</span>
+    </a>
+    <CgProfile size="2rem" />
+  </div>
+</nav>
+
+
+<style>
+nav {
+  position: sticky;
+  top: .25rem;
+  z-index: 100;
+  pointer-events: none;
+}
+
+nav > div {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: .5rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13.4px);
+  padding: .5rem 1.5rem;
+  margin-y: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  pointer-events: all;
+  margin-x: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: hsl(220, 13%, 91%);
+}
+
+span {
+    font-family: 'Pacifico';
+    font-size: larger;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+</style>

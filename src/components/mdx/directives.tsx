@@ -1,11 +1,9 @@
 import type { ReactNode } from 'react'
-import { css, cx } from 'styled-system/css'
 
 function CalloutDirective({ contents, id }: { contents: string; id?: string }) {
-  const styles = css({ background: 'slate.800', color: 'slate.200' })
 
   return (
-    <div className={cx('callout', styles)}>
+    <div style={{ background: 'gray', color: 'white'}}>
       {contents}
     </div>
   )
@@ -30,14 +28,12 @@ type DirectiveParserParams = {
 }
 
 export default function DirectiveParser({ name, type, contents, id }: DirectiveParserParams) {
-  const styles = css({
-    color: 'red',
-  })
+
 
   return type == 'containerDirective' && name == 'callout'
     ? <CalloutDirective contents={contents} id={id} />
     : (
-      <div className={styles}>
+      <div style={{color: 'red'}}>
         {contents}
       </div>
     )

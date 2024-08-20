@@ -8,16 +8,15 @@ category: "POST"
 tags: ["aftereffects", "illustrator", "photoshop"]
 ---
 
-import MyComponent2 from './component-2'
-import MyComponent from './component-1'
+import TestComponent from './test-component'
+import SpringComponent from './spring-component'
+
 
 # This is another example MDX page (nov11, first post)
  
 Token components...
 
 Again, **bold** and _italics_.
-
-<MyComponent2 client:load />
 
 
 A code box:
@@ -32,5 +31,10 @@ This is a list:
 
 And another react component:
 
+<TestComponent />
 
-<MyComponent client:load />
+# And this is a dynamic component
+
+<SpringComponent client:load />
+
+

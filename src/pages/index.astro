@@ -1,31 +1,30 @@
 ---
-import BaseLayout from "../layouts/base-layout.astro"
-import Blogpost from "../components/blogpost.tsx"
-import { Filters } from "../components/filters"
-import { css } from 'styled-system/css'
 import { getCollection } from 'astro:content'
+import Filters from '../components/landing/filters.astro'
+import Listing from '../components/landing/listing.astro'
+import Layout from '../layouts/layout.astro'
 
-const pageTitle = "Home Page";
 const posts = await getCollection('posts')
-
-const styles = css({
-  minHeight: '100vh',
-  marginX: '2rem'
-})
 
 // get unique tags from existings posts
 const allTags = posts.flatMap((v) => v.data.tags ?? [])
   .filter((v, i, a) => a.indexOf(v) == i)
 
 // get unique categories for existing posts
-const allCategories = posts.map(v => v.data.category)
+const allCategories = posts.map((v) => v.data.category)
   .filter((v, i, a) => a.indexOf(v) == i)
-
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-  <div class={styles}>
-    <Filters client:load tags={allTags} categories={allCategories} />
-    {posts.map((post) => <Blogpost postData={post.data} href={post.slug} />)}
-  </div>
-</BaseLayout>
+<Layout title="Index page 1.">
+  <main>
+    <!-- <Filters client:load tags={allTags} categories={allCategories} /> -->
+    <ul>{posts.map((post) => <Listing post={post.data} href={post.id.replace(/.mdx$/, '')} />)}</ul>
+  </main>
+</Layout>
+
+<style>
+  ul {
+    margin: 1.25rem;
+    padding: 0;
+  }
+</style>

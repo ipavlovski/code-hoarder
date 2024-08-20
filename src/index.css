@@ -4,6 +4,18 @@
 /* https://github.com/atomiks/rehype-pretty-code/issues/99 */
 /* https://delba.dev/blog/next-blog-build-time-syntax-highlighting#setup-pretty-code-and-contentlayer */
 
+
+
+
+
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+
+
 code {
     counter-reset: line;
     font-family: ui-monospace, Consolas, "Liberation Mono", "Courier New", monospace;

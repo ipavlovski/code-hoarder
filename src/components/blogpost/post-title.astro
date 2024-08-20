@@ -1,0 +1,78 @@
+---
+import { type PostDataProps } from '../../content/config'
+import getTagIcon from '../../lib/tag-icon'
+
+interface Props {
+  post: PostDataProps
+}
+
+const { post } = Astro.props
+---
+
+<hgroup>
+  <div class="metadata">
+    <div class="date-created">{post.createdAt}</div>
+    <div class="date-updated">{post.updated}</div>
+    <div class="category">{post.category}</div>
+    <div class="tags">
+      {
+        post.tags?.map((tag) => {
+        const tagIcon = getTagIcon(tag)
+        return (
+          <div>
+            <tagIcon.icon />
+            <span>{tag}</span>
+          </div>
+        )
+        })
+      }
+    </div>
+  </div>
+  <h2 class="subtitle">{post.description}</h2>
+  <h1 class="title">{post.title}</h1>
+</hgroup>
+
+<style>
+.metadata {
+  display: flex;
+  font-size: .8rem;
+  gap: .25rem;
+}
+
+.tags {
+    display: flex;
+align-items: center;
+gap: .625rem;
+margin-left: auto;
+}
+
+.tags svg {
+    display: inline;
+  margin-x: .25rem;
+}
+
+.tags svg:hover {
+    cursor: pointer;
+    color: pink.300;
+    transition: color 300ms ease;
+}
+
+.subtitle {
+  font-size: .9rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: .25rem;
+}
+
+.title {
+  font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+
+</style>
