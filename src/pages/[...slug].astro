@@ -34,7 +34,7 @@ const components = {
 <Layout title={entry.data.title}>
   <main>
     <!-- <h1>{entry.data.title}</h1> -->
-    <PostTitle post={entry.data}/>
+    <PostTitle post={entry.data} href={entry.slug}/>
     <Content components={components} />
     <Comments client:load />
   </main>

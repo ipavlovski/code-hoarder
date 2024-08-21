@@ -18,7 +18,7 @@ const allCategories = posts.map((v) => v.data.category)
 <Layout title="Index page 1.">
   <main>
     <!-- <Filters client:load tags={allTags} categories={allCategories} /> -->
-    <ul>{posts.map((post) => <Listing post={post.data} href={post.id.replace(/.mdx$/, '')} />)}</ul>
+    <ul>{posts.map((post) => <Listing post={post.data} href={post.slug} />)}</ul>
   </main>
 </Layout>
 

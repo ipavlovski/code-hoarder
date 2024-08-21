@@ -11,7 +11,7 @@ const { post, href } = Astro.props
 ---
 
 <li class="blogpost">
-  <div class="date-created">{post.createdAt}</div>
+  <div class="date-created">{href.split('/')[0]}</div>
   <div class="category">{post.category}</div>
   <div class="title">
     <a href={href}>{post.title}</a>

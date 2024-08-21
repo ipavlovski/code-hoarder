@@ -4,14 +4,16 @@ import getTagIcon from '../../lib/tag-icon'
 
 interface Props {
   post: PostDataProps
+  href: string
 }
 
-const { post } = Astro.props
+const { post, href } = Astro.props
+const date = href.split('/')[0]
 ---
 
 <hgroup>
   <div class="metadata">
-    <div class="date-created">{post.createdAt}</div>
+    <div class="date-created">{date}</div>
     <div class="date-updated">{post.updated}</div>
     <div class="category">{post.category}</div>
     <div class="tags">
