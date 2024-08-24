@@ -1,7 +1,6 @@
 import { type ChangeEventHandler, useState } from 'react'
 import { LuChevronsUpDown } from 'react-icons/lu'
-import { css } from 'styled-system/css'
-import { Box, Center, Flex, styled } from 'styled-system/jsx'
+
 
 const data = ['Alfalfa Sprouts', 'Apple', 'Apricot', 'Artichoke', 'Asian Pear',
   'Asparagus', 'Atemoya', 'Avocado', 'Bamboo Shoots', 'Banana', 'Bean Sprouts', 'Beans',
@@ -40,34 +39,35 @@ function Dropdown() {
   ))
 
   return (
-    <div>
-      <Flex align='center'>
-        <input value={inputValue} onChange={onChange}
-          onKeyDown={(e) => e.key == 'Escape' && setIsOpen(false)}
-          className={css({ color: 'black', p: 1, rounded: 'md' })} />
-        <LuChevronsUpDown
-          className={css({ cursor: 'pointer', mx: 2 })}
-          onClick={() => setIsOpen((val) => !val)} />
-        <p>{inputValue}</p>
-      </Flex>
-      {isOpen && (
-        <div
-          className={css({ bg: 'gray.800', display: 'inline-block', p: 1, my: 2,
-            rounded: 'md', pos: 'absolute', maxH: '20rem', overflow: 'auto' })}>
-          {filtered.map((item, ind) => (
-            <div key={ind}
-              className={css({ maxWidth: '10rem', p: 1, rounded: 'md', m: '1.5',
-                _hover: { cursor: 'pointer', bg: 'blue.700', color: 'blue.100' } })}
-              data-value={ind} onClick={(e) => {
-              setInputValue(filtered[ind])
-              setIsOpen(false)
-            }}>
-              {item}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    <div></div>
+    // <div>
+    //   <Flex align='center'>
+    //     <input value={inputValue} onChange={onChange}
+    //       onKeyDown={(e) => e.key == 'Escape' && setIsOpen(false)}
+    //       className={css({ color: 'black', p: 1, rounded: 'md' })} />
+    //     <LuChevronsUpDown
+    //       className={css({ cursor: 'pointer', mx: 2 })}
+    //       onClick={() => setIsOpen((val) => !val)} />
+    //     <p>{inputValue}</p>
+    //   </Flex>
+    //   {isOpen && (
+    //     <div
+    //       className={css({ bg: 'gray.800', display: 'inline-block', p: 1, my: 2,
+    //         rounded: 'md', pos: 'absolute', maxH: '20rem', overflow: 'auto' })}>
+    //       {filtered.map((item, ind) => (
+    //         <div key={ind}
+    //           className={css({ maxWidth: '10rem', p: 1, rounded: 'md', m: '1.5',
+    //             _hover: { cursor: 'pointer', bg: 'blue.700', color: 'blue.100' } })}
+    //           data-value={ind} onClick={(e) => {
+    //           setInputValue(filtered[ind])
+    //           setIsOpen(false)
+    //         }}>
+    //           {item}
+    //         </div>
+    //       ))}
+    //     </div>
+    //   )}
+    // </div>
   )
 }
 
@@ -76,8 +76,9 @@ function Dropdown() {
 
 export default function Combobox() {
   return (
-    <div className={css({ m: 4, '& > p': { color: 'slate.400' } })}>
-      <Dropdown />
-    </div>
+    <div></div>
+    // <div className={css({ m: 4, '& > p': { color: 'slate.400' } })}>
+    //   <Dropdown />
+    // </div>
   )
 }
