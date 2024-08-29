@@ -1,0 +1,64 @@
+---
+title: "Astro Images on Cloudflare"
+category: "POST"
+tags: ["astro", "cloudflare", "webdev"]
+updatedAt: []
+---
+
+# The Issue
+
+Local: `http://localhost:4322/2024-08-21/cloudflare-wrangler-basics`
+
+![](/src/content/posts/2024-08-25/explorer_BvgvIxnMAV.png)
+
+Remote: `https://b48fcd41.stuck-on-torque.pages.dev/2024-08-21/cloudflare-wrangler-basics/`
+
+![](/src/content/posts/2024-08-25/explorer_ttLSvnH4lE.png)
+
+Spot the difference.
+Hint: the image on remote is not showing up.
+
+
+
+# The Cause
+
+Deploying happens in 2 steps:
+```bash
+# create the `dist` directory
+npm run build
+
+# deploy the `dist` directory
+wrangler pages deploy dist
+```
+
+On build, the images get converted to webp:
+
+`src="/_astro/explorer_PHVizlMR6I.CNF-ugon_Zr6hnA.webp"`
+
+![](/src/content/posts/2024-08-25/explorer_c74EnQbV8k.png)
+
+So when deploying to astro, the `_astro` dir should contain the image.
+
+![](/src/content/posts/2024-08-25/explorer_7xXWB7BoFX.png)
+
+
+
+
+
+
+
+# Solutions
+
+On github (discussions/850) there is a suggestion to write custom loader code.
+
+![](/src/content/posts/2024-08-25/explorer_dX5uILPMGl.png)
+
+https://github.com/withastro/roadmap/discussions/850
+
+
+The loaders can be written to implement 
+
+![](/src/content/posts/2024-08-25/explorer_1gz4ElJ3Xr.png)
+
+Or a prefix used
+https://docs.astro.build/en/reference/configuration-reference/#buildassetsprefix
